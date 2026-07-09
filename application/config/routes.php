@@ -55,6 +55,7 @@ $route['kegiatan/new']['GET'] = 'KegiatanController/newKegiatan';
 $route['kegiatan']['POST'] = 'KegiatanController/tambahKegiatan';
 $route['kegiatan/edit/(:num)']['GET'] = 'KegiatanController/editKegiatan/$1';
 $route['kegiatan/update']['POST'] = 'KegiatanController/updateKegiatan';
+$route['kegiatan/upload-editor']['POST'] = 'KegiatanController/uploadEditor';
 $route['kegiatan/delete/(:num)']['GET'] = 'KegiatanController/hapusKegiatan/$1';
 
 $route['kepanitiaan']['GET'] = 'KepanitiaanController/index';

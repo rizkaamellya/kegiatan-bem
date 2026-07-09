@@ -37,16 +37,41 @@ class KegiatanController extends CI_Controller {
         return $uploadData['file_name'];
     }
 
+    public function uploadEditor() {
+        $uploadPath = './uploads/kegiatan/editor/';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0755, true);
+        }
+
+        $config['upload_path'] = $uploadPath;
+        $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+        $config['max_size'] = 5120;
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('file')) {
+            $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('error' => $this->upload->display_errors('', ''))));
+            return;
+        }
+
+        $uploadData = $this->upload->data();
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array(
+                'location' => base_url() . 'uploads/kegiatan/editor/' . $uploadData['file_name']
+            )));
+    }
+
     public function tambahKegiatan() {
-        $foto = $this->uploadFileKegiatan('foto', 'jpg|jpeg|png');
-        $filePdf = $this->uploadFileKegiatan('file_pdf', 'pdf');
         $val = array(
             'nama_kegiatan' => $this->input->post('nama_kegiatan'),
             'tanggal' => $this->input->post('tanggal'),
             'lokasi' => $this->input->post('lokasi'),
-            'deskripsi' => $this->input->post('deskripsi'),
-            'foto' => $foto,
-            'file_pdf' => $filePdf
+            'deskripsi' => $this->input->post('deskripsi')
         );    
         $this->Kegiatan->tambahKegiatan($val);
         redirect('kegiatan');

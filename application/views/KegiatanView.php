@@ -125,8 +125,7 @@
                 <th scope="col">Nama</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Lokasi</th>
-                <th scope="col">Foto</th>
-                <th scope="col">PDF</th>
+                <th scope="col">Deskripsi</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -137,18 +136,7 @@
                 <td><?php echo $k->tanggal; ?></td>
                 <td><?php echo $k->lokasi; ?></td>
                 <td>
-                  <?php if (!empty($k->foto)) { ?>
-                  <img src="<?php echo base_url(); ?>uploads/kegiatan/<?php echo html_escape($k->foto); ?>" alt="Foto kegiatan" style="width: 80px; height: 56px; object-fit: cover;">
-                  <?php } else { ?>
-                  -
-                  <?php } ?>
-                </td>
-                <td>
-                  <?php if (!empty($k->file_pdf)) { ?>
-                  <a href="<?php echo base_url(); ?>uploads/kegiatan/<?php echo html_escape($k->file_pdf); ?>" target="_blank">Lihat</a>
-                  <?php } else { ?>
-                  -
-                  <?php } ?>
+                  <?php echo !empty($k->deskripsi) ? html_escape(substr(strip_tags($k->deskripsi), 0, 80)) : '-'; ?>
                 </td>
                 <td>
                   <a href="<?php echo base_url(); ?>index.php/kegiatan/edit/<?php echo $k->id_kegiatan; ?>" class="btn btn-success">Ubah</a>

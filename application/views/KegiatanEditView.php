@@ -2,6 +2,7 @@
 <html lang="en" data-bs-theme="auto">
   <head>
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -36,32 +37,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Deskripsi</label>
-          <div class="btn-group mb-2" role="group">
-            <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('bold')">B</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('italic')">I</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('underline')">U</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('insertUnorderedList')">List</button>
-          </div>
-          <div id="deskripsi_editor" class="form-control" contenteditable="true" style="min-height: 160px;"><?php echo $k->deskripsi; ?></div>
-          <input type="hidden" name="deskripsi" id="deskripsi">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Foto</label>
-          <input type="file" name="foto" class="form-control" accept="image/png,image/jpeg">
-          <?php if (!empty($k->foto)) { ?>
-          <div class="mt-2">
-            <img src="<?php echo base_url(); ?>uploads/kegiatan/<?php echo html_escape($k->foto); ?>" alt="Foto kegiatan" style="max-width: 160px; height: auto;">
-          </div>
-          <?php } ?>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">File PDF</label>
-          <input type="file" name="file_pdf" class="form-control" accept="application/pdf">
-          <?php if (!empty($k->file_pdf)) { ?>
-          <div class="mt-2">
-            <a href="<?php echo base_url(); ?>uploads/kegiatan/<?php echo html_escape($k->file_pdf); ?>" target="_blank">Lihat PDF saat ini</a>
-          </div>
-          <?php } ?>
+          <textarea name="deskripsi" id="deskripsi" class="form-control"><?php echo html_escape($k->deskripsi); ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="<?php echo base_url(); ?>index.php/kegiatan" class="btn btn-secondary">Batal</a>
@@ -72,17 +48,73 @@
     </main>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
     <script>
-      function formatDeskripsi(command) {
-        document.execCommand(command, false, null);
-        document.getElementById('deskripsi_editor').focus();
-      }
+      var editorUploadUrl = '<?php echo base_url(); ?>index.php/kegiatan/upload-editor';
 
-      var form = document.querySelector('form');
-      if (form) {
-        form.addEventListener('submit', function () {
-          document.getElementById('deskripsi').value = document.getElementById('deskripsi_editor').innerHTML;
+      function uploadEditorFile(file) {
+        var formData = new FormData();
+        formData.append('file', file);
+
+        return fetch(editorUploadUrl, {
+          method: 'POST',
+          body: formData
+        }).then(function (response) {
+          if (!response.ok) {
+            throw new Error('Upload gagal');
+          }
+          return response.json();
+        }).then(function (data) {
+          return data.location;
         });
       }
+
+      tinymce.init({
+        selector: '#deskripsi',
+        height: 360,
+        menubar: false,
+        plugins: 'link image lists table code',
+        toolbar: 'undo redo | blocks | bold italic underline | bullist numlist | link image pdfupload | table | code',
+        skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@6/skins/ui/oxide',
+        content_css: 'https://cdn.jsdelivr.net/npm/tinymce@6/skins/content/default/content.min.css',
+        automatic_uploads: true,
+        file_picker_types: 'image file',
+        images_upload_handler: function (blobInfo) {
+          return uploadEditorFile(blobInfo.blob());
+        },
+        file_picker_callback: function (callback, value, meta) {
+          var input = document.createElement('input');
+          input.type = 'file';
+          input.accept = meta.filetype === 'image' ? 'image/png,image/jpeg' : 'application/pdf';
+          input.onchange = function () {
+            var file = this.files[0];
+            uploadEditorFile(file).then(function (url) {
+              callback(url, { text: file.name, title: file.name });
+            }).catch(function () {
+              alert('Upload file gagal');
+            });
+          };
+          input.click();
+        },
+        setup: function (editor) {
+          editor.ui.registry.addButton('pdfupload', {
+            text: 'PDF',
+            tooltip: 'Upload PDF',
+            onAction: function () {
+              var input = document.createElement('input');
+              input.type = 'file';
+              input.accept = 'application/pdf';
+              input.onchange = function () {
+                var file = this.files[0];
+                uploadEditorFile(file).then(function (url) {
+                  editor.insertContent('<p><a href="' + url + '" target="_blank">' + file.name + '</a></p>');
+                }).catch(function () {
+                  alert('Upload PDF gagal');
+                });
+              };
+              input.click();
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>
