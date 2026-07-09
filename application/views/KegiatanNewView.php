@@ -106,9 +106,6 @@
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/dokumen">Dokumen</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
             </li>
           </ul>
@@ -116,7 +113,7 @@
       </div>
     </nav>
     <main class="container">
-      <form method="post" action="<?php echo base_url(); ?>index.php/kegiatan">
+      <form method="post" action="<?php echo base_url(); ?>index.php/kegiatan" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Nama Kegiatan</label>
             <input type="text" name="nama_kegiatan" class="form-control">
@@ -130,14 +127,39 @@
             <input type="text" name="lokasi" class="form-control">
         </div>
         <div class="mb-3">
-            <label class="form-label">Deskropsi</label>
-            <input type="text" name="deskripsi" class="form-control">
-</div>
+            <label class="form-label">Deskripsi</label>
+            <div class="btn-group mb-2" role="group">
+                <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('bold')">B</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('italic')">I</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('underline')">U</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="formatDeskripsi('insertUnorderedList')">List</button>
+            </div>
+            <div id="deskripsi_editor" class="form-control" contenteditable="true" style="min-height: 160px;"></div>
+            <input type="hidden" name="deskripsi" id="deskripsi">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Foto</label>
+            <input type="file" name="foto" class="form-control" accept="image/png,image/jpeg">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">File PDF</label>
+            <input type="file" name="file_pdf" class="form-control" accept="application/pdf">
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </main>
     <script src="
 				<?php echo base_url(); ?>assets/js/bootstrap.min.js">
+    </script>
+    <script>
+      function formatDeskripsi(command) {
+        document.execCommand(command, false, null);
+        document.getElementById('deskripsi_editor').focus();
+      }
+
+      document.querySelector('form').addEventListener('submit', function () {
+        document.getElementById('deskripsi').value = document.getElementById('deskripsi_editor').innerHTML;
+      });
     </script>
   </body>
 </html>

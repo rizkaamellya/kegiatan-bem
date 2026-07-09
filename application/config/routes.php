@@ -64,13 +64,6 @@ $route['kepanitiaan/edit/(:num)']['GET'] = 'KepanitiaanController/editKepanitiaa
 $route['kepanitiaan/update']['POST'] = 'KepanitiaanController/updateKepanitiaan';
 $route['kepanitiaan/delete/(:num)']['GET'] = 'KepanitiaanController/hapusKepanitiaan/$1';
 
-$route['dokumen']['GET'] = 'DokumenController/index';
-$route['dokumen/new']['GET'] = 'DokumenController/newDokumen';
-$route['dokumen']['POST'] = 'DokumenController/tambahDokumen';
-$route['dokumen/edit/(:num)']['GET'] = 'DokumenController/edit/$1';
-$route['dokumen/update']['POST'] = 'DokumenController/update';
-$route['dokumen/delete/(:num)']['GET'] = 'DokumenController/delete/$1';
-
 $route['keuangan']['GET'] = 'KeuanganController/index';
 $route['keuangan/new']['GET'] = 'KeuanganController/newKeuangan';
 $route['keuangan']['POST'] = 'KeuanganController/tambahKeuangan';

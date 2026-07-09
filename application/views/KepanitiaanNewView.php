@@ -106,9 +106,6 @@
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/dokumen">Dokumen</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
             </li>
           </ul>
@@ -118,8 +115,13 @@
     <main class="container">
       <form method="post" action="<?php echo base_url(); ?>index.php/kepanitiaan">
         <div class="mb-3">
-            <label class="form-label">Id_kegiatan</label>
-            <input type="text" name="id_kegiatan" class="form-control">
+            <label class="form-label">Kegiatan</label>
+            <select name="id_kegiatan" class="form-control" required>
+              <option value="">Pilih Kegiatan</option>
+              <?php foreach ($kegiatan as $k) { ?>
+              <option value="<?php echo $k->id_kegiatan; ?>"><?php echo html_escape($k->nama_kegiatan); ?></option>
+              <?php } ?>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Nama_panitia</label>

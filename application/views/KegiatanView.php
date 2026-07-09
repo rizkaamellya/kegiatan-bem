@@ -106,9 +106,6 @@
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/dokumen">Dokumen</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
             </li>
           </ul>
@@ -128,6 +125,8 @@
                 <th scope="col">Nama</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Lokasi</th>
+                <th scope="col">Foto</th>
+                <th scope="col">PDF</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -137,6 +136,20 @@
                 <td><?php echo $k->nama_kegiatan; ?></td>
                 <td><?php echo $k->tanggal; ?></td>
                 <td><?php echo $k->lokasi; ?></td>
+                <td>
+                  <?php if (!empty($k->foto)) { ?>
+                  <img src="<?php echo base_url(); ?>uploads/kegiatan/<?php echo html_escape($k->foto); ?>" alt="Foto kegiatan" style="width: 80px; height: 56px; object-fit: cover;">
+                  <?php } else { ?>
+                  -
+                  <?php } ?>
+                </td>
+                <td>
+                  <?php if (!empty($k->file_pdf)) { ?>
+                  <a href="<?php echo base_url(); ?>uploads/kegiatan/<?php echo html_escape($k->file_pdf); ?>" target="_blank">Lihat</a>
+                  <?php } else { ?>
+                  -
+                  <?php } ?>
+                </td>
                 <td>
                   <a href="<?php echo base_url(); ?>index.php/kegiatan/edit/<?php echo $k->id_kegiatan; ?>" class="btn btn-success">Ubah</a>
                   <a href="<?php echo base_url(); ?>index.php/kegiatan/delete/<?php echo $k->id_kegiatan; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>

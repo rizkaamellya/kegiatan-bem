@@ -5,6 +5,7 @@ class KeuanganController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Keuangan');
+        $this->load->model('Kegiatan');
     }
 
     public function index() {
@@ -19,10 +20,12 @@ class KeuanganController extends CI_Controller {
     }
     public function newKeuangan() {
         $data['keuangan'] = null;
+        $data['kegiatan'] = $this->Kegiatan->ambilKegiatan();
         $this->load->view('KeuanganNewView', $data);
     }    
     public function tambahKeuangan() {
         $val = array(
+            'id_kegiatan' => $this->input->post('id_kegiatan'),
             'keterangan' => $this->input->post('keterangan'),
             'jumlah' => $this->input->post('jumlah'),
             'harga' => $this->input->post('harga'),
@@ -35,12 +38,14 @@ class KeuanganController extends CI_Controller {
 
     public function editKeuangan($idKeuangan) {
         $data['keuangan'] = $this->Keuangan->ambilKeuanganBerdasarkanId($idKeuangan);
+        $data['kegiatan'] = $this->Kegiatan->ambilKegiatan();
         $this->load->view('KeuanganEditView', $data);
     }
 
     public function updateKeuangan() {
         $val = array(
-           'keterangan' => $this->input->post('keterangan'),
+            'id_kegiatan' => $this->input->post('id_kegiatan'),
+            'keterangan' => $this->input->post('keterangan'),
             'jumlah' => $this->input->post('jumlah'),
             'harga' => $this->input->post('harga'),
             'tanggal' => $this->input->post('tanggal')

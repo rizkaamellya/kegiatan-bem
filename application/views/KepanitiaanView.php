@@ -106,9 +106,6 @@
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/dokumen">Dokumen</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
             </li>
           </ul>

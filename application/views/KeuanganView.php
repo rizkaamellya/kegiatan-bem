@@ -105,9 +105,6 @@
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/dokumen">Dokumen</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
             </li>
           </ul>
@@ -124,6 +121,7 @@
           <table class="table">
             <thead>
               <tr>
+                <th scope="col">Kegiatan</th>
                 <th scope="col">Keterangan</th>
                 <th scope="col">Jumlah </th>
                 <th scope="col">Harga</th>
@@ -134,6 +132,7 @@
             <tbody>
                <?php foreach ($keuangan as $k) { ?>
               <tr>
+                <td><?php echo !empty($k->id_kegiatan) ? $k->id_kegiatan : '-'; ?></td>
                 <td><?php echo $k->keterangan; ?></td>
                 <td><?php echo $k->jumlah; ?></td>
                 <td><?php echo $k->harga; ?></td>

@@ -11,7 +11,6 @@
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/kegiatan">Kegiatan</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">Kepanitiaan</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/dokumen">Dokumen</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a></li>
           </ul>
         </div>
@@ -23,6 +22,17 @@
       <?php if ($k) { ?>
       <form method="post" action="<?php echo base_url(); ?>index.php/keuangan/update">
         <input type="hidden" name="id_keuangan" value="<?php echo $k->id_keuangan; ?>">
+        <div class="mb-3">
+          <label class="form-label">Kegiatan</label>
+          <select name="id_kegiatan" class="form-control" required>
+            <option value="">Pilih Kegiatan</option>
+            <?php foreach ($kegiatan as $kg) { ?>
+            <option value="<?php echo $kg->id_kegiatan; ?>" <?php echo $kg->id_kegiatan == $k->id_kegiatan ? 'selected' : ''; ?>>
+              <?php echo html_escape($kg->nama_kegiatan); ?>
+            </option>
+            <?php } ?>
+          </select>
+        </div>
         <div class="mb-3">
           <label class="form-label">Keterangan</label>
           <input type="text" name="keterangan" class="form-control" value="<?php echo html_escape($k->keterangan); ?>">

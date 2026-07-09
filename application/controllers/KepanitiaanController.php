@@ -5,6 +5,7 @@ class KepanitiaanController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Kepanitiaan');
+        $this->load->model('Kegiatan');
     }
 
     public function index() {
@@ -19,6 +20,7 @@ class KepanitiaanController extends CI_Controller {
     }
     public function newKepanitiaan() {
         $data['kepanitiaan'] = null;
+        $data['kegiatan'] = $this->Kegiatan->ambilKegiatan();
         $this->load->view('KepanitiaanNewView', $data);
     }    
     public function tambahKepanitiaan() {
@@ -34,6 +36,7 @@ class KepanitiaanController extends CI_Controller {
 
     public function editKepanitiaan($idKepanitiaan) {
         $data['kepanitiaan'] = $this->Kepanitiaan->ambilKepanitiaanBerdasarkanId($idKepanitiaan);
+        $data['kegiatan'] = $this->Kegiatan->ambilKegiatan();
         $this->load->view('KepanitiaanEditView', $data);
     }
 
