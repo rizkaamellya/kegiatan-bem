@@ -18,7 +18,7 @@ class Kegiatan extends CI_Model {
 
     public function ubahKegiatan($kegiatan, $idKegiatan) {
         $this->db->where('id_kegiatan', $idKegiatan);
-        $this->db->update('kegiatan', $idKegiatan);
+        $this->db->update('kegiatan', $kegiatan);
     }
 
     public function hapusKegiatan($idKegiatan) {

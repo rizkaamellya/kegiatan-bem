@@ -18,32 +18,29 @@
       </div>
     </nav>
     <main class="container">
-      <?php $k = !empty($keuangan) ? $keuangan[0] : null; ?>
-      <h3 class="text-center mb-4">Edit Keuangan</h3>
-      <?php if ($k) { ?>
-      <form method="post" action="<?php echo base_url(); ?>index.php/keuangan/update">
-        <input type="hidden" name="id_keuangan" value="<?php echo $k->id_keuangan; ?>">
+      <?php $d = !empty($dokumen) ? $dokumen[0] : null; ?>
+      <h3 class="text-center mb-4">Edit Dokumen</h3>
+      <?php if ($d) { ?>
+      <form method="post" action="<?php echo base_url(); ?>index.php/dokumen/update" enctype="multipart/form-data">
+        <input type="hidden" name="id_dokumen" value="<?php echo $d->id_dokumen; ?>">
         <div class="mb-3">
-          <label class="form-label">Keterangan</label>
-          <input type="text" name="keterangan" class="form-control" value="<?php echo html_escape($k->keterangan); ?>">
+          <label class="form-label">ID Kegiatan</label>
+          <input type="text" name="id_kegiatan" class="form-control" value="<?php echo html_escape($d->id_kegiatan); ?>" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">Jumlah</label>
-          <input type="text" name="jumlah" class="form-control" value="<?php echo html_escape($k->jumlah); ?>">
+          <label class="form-label">Jenis Dokumen</label>
+          <input type="text" name="jenis_dokumen" class="form-control" value="<?php echo html_escape($d->jenis_dokumen); ?>" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">Harga</label>
-          <input type="text" name="harga" class="form-control" value="<?php echo html_escape($k->harga); ?>">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Tanggal</label>
-          <input type="date" name="tanggal" class="form-control" value="<?php echo html_escape($k->tanggal); ?>" required>
+          <label class="form-label">File</label>
+          <input type="file" name="nama_file" class="form-control">
+          <div class="form-text">File saat ini: <?php echo html_escape($d->nama_file); ?></div>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="<?php echo base_url(); ?>index.php/keuangan" class="btn btn-secondary">Batal</a>
+        <a href="<?php echo base_url(); ?>index.php/dokumen" class="btn btn-secondary">Batal</a>
       </form>
       <?php } else { ?>
-      <div class="alert alert-warning">Data keuangan tidak ditemukan.</div>
+      <div class="alert alert-warning">Data dokumen tidak ditemukan.</div>
       <?php } ?>
     </main>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>

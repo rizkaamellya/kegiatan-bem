@@ -116,6 +116,7 @@
       </div>
     </nav>
     <main class="container">
+      <form method="post" action="<?php echo base_url(); ?>index.php/kepanitiaan">
         <div class="mb-3">
             <label class="form-label">Id_kegiatan</label>
             <input type="text" name="id_kegiatan" class="form-control">
@@ -129,6 +130,7 @@
             <input type="text" name="jabatan" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </main>
     <script src="
 				<?php echo base_url(); ?>assets/js/bootstrap.min.js">

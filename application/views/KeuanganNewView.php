@@ -116,7 +116,7 @@
       </div>
     </nav>
     <main class="container">
-        <form>
+        <form method="post" action="<?php echo base_url(); ?>index.php/keuangan">
          <div class="mb-3">
             <label class="form-label">Keterangan</label>
             <input type="text" name="keterangan" class="form-control">

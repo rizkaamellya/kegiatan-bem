@@ -8,29 +8,26 @@ class AdminController extends CI_Controller {
     }
 
     public function index() {
-        // $session = $this->session->userdata('isLogin');
-
-        // if ($session == false) {
-        //     redirect('login');
-        // } else {
-            $data['admin'] = $this->Admin->ambilAdmin();
-            $this->load->view('AdminView', $data);
-        // }
+        $data['admin'] = $this->Admin->ambilAdmin();
+        $this->load->view('AdminView', $data);
     }
-     public function newAdmin() {
-        $data['admin'] = {};
+
+    public function newAdmin() {
+        $data['admin'] = null;
         $this->load->view('AdminNewView', $data);
+    }
+
     public function tambahAdmin() {
         $val = array(
             'username' => $this->input->post('username'),
             'password' => $this->input->post('password')
         );
         $this->Admin->tambahAdmin($val);
-        redirect('AdminController');
+        redirect('admin');
     }
 
     public function editAdmin($idAdmin) {
-        $data['admin'] = $this->Admin->ambilAdminBerdasarkanId($idadmin);
+        $data['admin'] = $this->Admin->ambilAdminBerdasarkanId($idAdmin);
         $this->load->view('AdminEditView', $data);
     }
 
@@ -40,12 +37,12 @@ class AdminController extends CI_Controller {
             'password' => $this->input->post('password')
         );
         $this->Admin->ubahAdmin($val, $this->input->post('id_admin'));
-        redirect('AdminController');
+        redirect('admin');
     }
 
-    public function hapusAdmin($idadmin) {
-        $this->Admin->hapusadmin($idadmin);
-        redirect('AdminController');
+    public function hapusAdmin($idAdmin) {
+        $this->Admin->hapusAdmin($idAdmin);
+        redirect('admin');
     }
 
 }

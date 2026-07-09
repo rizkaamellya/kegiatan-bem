@@ -27,9 +27,9 @@ class KegiatanController extends CI_Controller {
             'tanggal' => $this->input->post('tanggal'),
             'lokasi' => $this->input->post('lokasi'),
             'deskripsi' => $this->input->post('deskripsi')
-         );    
+        );    
         $this->Kegiatan->tambahKegiatan($val);
-        redirect('KegiatanController');
+        redirect('kegiatan');
     }
 
     public function editKegiatan($idKegiatan) {
@@ -42,16 +42,15 @@ class KegiatanController extends CI_Controller {
             'nama_kegiatan' => $this->input->post('nama_kegiatan'),
             'tanggal' => $this->input->post('tanggal'),
             'lokasi' => $this->input->post('lokasi'),
-            'deskripsi' => $this->input->post('deskripsi'),
-            'id_admin' => $this->input->post('id_admin')
+            'deskripsi' => $this->input->post('deskripsi')
         );
         $this->Kegiatan->ubahKegiatan($val, $this->input->post('id_kegiatan'));
-        redirect('KegiatanController');
+        redirect('kegiatan');
     }
 
     public function hapusKegiatan($idKegiatan) {
         $this->Kegiatan->hapuskegiatan($idKegiatan);
-        redirect('KegiatanController');
+        redirect('kegiatan');
     }
 
 }

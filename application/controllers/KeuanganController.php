@@ -30,7 +30,7 @@ class KeuanganController extends CI_Controller {
            
          );    
         $this->Keuangan->tambahKeuangan($val);
-        redirect('KeuanganController');
+        redirect('keuangan');
     }
 
     public function editKeuangan($idKeuangan) {
@@ -46,12 +46,12 @@ class KeuanganController extends CI_Controller {
             'tanggal' => $this->input->post('tanggal')
         );
         $this->Keuangan->ubahKeuangan($val, $this->input->post('id_keuangan'));
-        redirect('KeuanganController');
+        redirect('keuangan');
     }
 
     public function hapusKeuangan($idKeuangan) {
-        $this->Keuangan->hapuskeuangan($idkeuangan);
-        redirect('KeuanganController');
+        $this->Keuangan->hapusKeuangan($idKeuangan);
+        redirect('keuangan');
     }
 
 }

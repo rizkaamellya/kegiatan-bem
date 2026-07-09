@@ -18,7 +18,7 @@ class Dokumen extends CI_Model {
 
     public function ubahDokumen($dokumen, $idDokumen) {
         $this->db->where('id_dokumen', $idDokumen);
-        $this->db->update('dokumen', $idDokumen);
+        $this->db->update('dokumen', $dokumen);
     }
 
     public function hapusDokumen($idDokumen) {

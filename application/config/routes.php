@@ -78,6 +78,13 @@ $route['keuangan/edit/(:num)']['GET'] = 'KeuanganController/editKeuangan/$1';
 $route['keuangan/update']['POST'] = 'KeuanganController/updateKeuangan';
 $route['keuangan/delete/(:num)']['GET'] = 'KeuanganController/hapusKeuangan/$1';
 
+$route['admin']['GET'] = 'AdminController/index';
+$route['admin/new']['GET'] = 'AdminController/newAdmin';
+$route['admin']['POST'] = 'AdminController/tambahAdmin';
+$route['admin/edit/(:num)']['GET'] = 'AdminController/editAdmin/$1';
+$route['admin/update']['POST'] = 'AdminController/updateAdmin';
+$route['admin/delete/(:num)']['GET'] = 'AdminController/hapusAdmin/$1';
+
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

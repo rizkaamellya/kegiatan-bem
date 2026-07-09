@@ -126,24 +126,23 @@
               <tr>
                 <th scope="col">Keterangan</th>
                 <th scope="col">Jumlah </th>
+                <th scope="col">Harga</th>
                 <th scope="col">Tanggal</th>
-                <th scope="col">Kegiatan</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
                <?php foreach ($keuangan as $k) { ?>
               <tr>
-                <td><?php echo $k->id_keuangan; ?></td>
                 <td><?php echo $k->keterangan; ?></td>
                 <td><?php echo $k->jumlah; ?></td>
                 <td><?php echo $k->harga; ?></td>
                 <td><?php echo $k->tanggal; ?></td>
                 <td>
-                  <button type="button" class="btn btn-success">Ubah</button>
-                  <button type="button" class="btn btn-danger">Hapus</button>
+                  <a href="<?php echo base_url(); ?>index.php/keuangan/edit/<?php echo $k->id_keuangan; ?>" class="btn btn-success">Ubah</a>
+                  <a href="<?php echo base_url(); ?>index.php/keuangan/delete/<?php echo $k->id_keuangan; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
                 </td>
-              <tr>
+              </tr>
                  <?php } ?>
             </tbody>
           </table>

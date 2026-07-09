@@ -29,7 +29,7 @@ class KepanitiaanController extends CI_Controller {
            
          );    
         $this->Kepanitiaan->tambahKepanitiaan($val);
-        redirect('KepanitiaanController');
+        redirect('kepanitiaan');
     }
 
     public function editKepanitiaan($idKepanitiaan) {
@@ -44,12 +44,12 @@ class KepanitiaanController extends CI_Controller {
             'jabatan' => $this->input->post('jabatan')
         );
         $this->Kepanitiaan->ubahKepanitiaan($val, $this->input->post('id_kepanitiaan'));
-        redirect('KepanitiaanController');
+        redirect('kepanitiaan');
     }
 
     public function hapusKepanitiaan($idKepanitiaan) {
         $this->Kepanitiaan->hapuskepanitiaan($idKepanitiaan);
-        redirect('KepanitiaanController');
+        redirect('kepanitiaan');
     }
 
 }

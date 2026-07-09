@@ -18,7 +18,7 @@ class Keuangan extends CI_Model {
 
     public function ubahKeuangan($keuangan, $idKeuangan) {
         $this->db->where('id_keuangan', $idKeuangan);
-        $this->db->update('keuangan', $idKeuangan);
+        $this->db->update('keuangan', $keuangan);
     }
 
     public function hapusKeuangan($idKeuangan) {
