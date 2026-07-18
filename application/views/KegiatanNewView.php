@@ -128,6 +128,11 @@
             <input type="text" name="lokasi" class="form-control">
         </div>
         <div class="mb-3">
+            <label class="form-label" for="foto">Foto Thumbnail</label>
+            <input type="file" name="foto" id="foto" class="form-control" accept="image/jpeg,image/png">
+            <div class="form-text">Format JPG atau PNG. Ukuran maksimal 2 MB.</div>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Deskripsi</label>
             <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
         </div>

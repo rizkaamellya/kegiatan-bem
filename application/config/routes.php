@@ -58,6 +58,9 @@ $route['root/kegiatan/update']['POST'] = 'KegiatanController/updateKegiatan';
 $route['root/kegiatan/upload-editor']['POST'] = 'KegiatanController/uploadEditor';
 $route['root/kegiatan/delete/(:num)']['GET'] = 'KegiatanController/hapusKegiatan/$1';
 
+$route['kegiatan']['GET'] = 'KegiatanPublikController/index';
+$route['kegiatan/(:num)']['GET'] = 'KegiatanPublikController/detail/$1';
+
 $route['root/kepanitiaan']['GET'] = 'KepanitiaanController/index';
 $route['root/kepanitiaan/new']['GET'] = 'KepanitiaanController/newKepanitiaan';
 $route['root/kepanitiaan']['POST'] = 'KepanitiaanController/tambahKepanitiaan';

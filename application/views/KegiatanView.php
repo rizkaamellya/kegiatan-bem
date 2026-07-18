@@ -124,6 +124,7 @@
           <table class="table">
             <thead>
               <tr>
+                <th scope="col">Thumbnail</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Lokasi</th>
@@ -134,9 +135,16 @@
             <tbody>
               <?php foreach ($kegiatan as $k) { ?>
               <tr>
-                <td><?php echo $k->nama_kegiatan; ?></td>
-                <td><?php echo $k->tanggal; ?></td>
-                <td><?php echo $k->lokasi; ?></td>
+                <td>
+                  <?php if (!empty($k->foto)) { ?>
+                    <img src="<?php echo base_url('uploads/kegiatan/' . rawurlencode($k->foto)); ?>" alt="Thumbnail <?php echo html_escape($k->nama_kegiatan); ?>" class="rounded" style="width: 120px; height: 72px; object-fit: cover;">
+                  <?php } else { ?>
+                    <span class="text-muted">Belum ada foto</span>
+                  <?php } ?>
+                </td>
+                <td><?php echo html_escape($k->nama_kegiatan); ?></td>
+                <td><?php echo html_escape($k->tanggal); ?></td>
+                <td><?php echo html_escape($k->lokasi); ?></td>
                 <td>
                   <?php echo !empty($k->deskripsi) ? html_escape(substr(strip_tags($k->deskripsi), 0, 80)) : '-'; ?>
                 </td>

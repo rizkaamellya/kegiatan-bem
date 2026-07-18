@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS kegiatan (
   nama_kegiatan VARCHAR(150) NOT NULL,
   tanggal DATE NOT NULL,
   lokasi VARCHAR(150) DEFAULT NULL,
+  foto VARCHAR(255) DEFAULT NULL,
   deskripsi MEDIUMTEXT DEFAULT NULL,
   PRIMARY KEY (id_kegiatan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

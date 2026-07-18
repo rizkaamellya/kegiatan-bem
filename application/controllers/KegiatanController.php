@@ -24,8 +24,12 @@ class KegiatanController extends MY_Controller {
 
     private function uploadFileKegiatan($field, $allowedTypes) {
         $config['upload_path'] = './uploads/kegiatan/';
+        if (!is_dir($config['upload_path'])) {
+            mkdir($config['upload_path'], 0755, true);
+        }
         $config['allowed_types'] = $allowedTypes;
         $config['max_size'] = 2048;
+        $config['encrypt_name'] = true;
 
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
@@ -72,7 +76,15 @@ class KegiatanController extends MY_Controller {
             'tanggal' => $this->input->post('tanggal'),
             'lokasi' => $this->input->post('lokasi'),
             'deskripsi' => $this->input->post('deskripsi')
-        );    
+        );
+
+        if (isset($_FILES['foto']) && $_FILES['foto']['size'] > 0) {
+            $foto = $this->uploadFileKegiatan('foto', 'jpg|jpeg|png');
+            if ($foto) {
+                $val['foto'] = $foto;
+            }
+        }
+
         $this->Kegiatan->tambahKegiatan($val);
         redirect('root/kegiatan');
     }

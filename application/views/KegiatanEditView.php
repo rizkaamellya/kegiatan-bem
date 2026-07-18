@@ -36,6 +36,16 @@
           <input type="text" name="lokasi" class="form-control" value="<?php echo html_escape($k->lokasi); ?>">
         </div>
         <div class="mb-3">
+          <label class="form-label" for="foto">Foto Thumbnail</label>
+          <?php if (!empty($k->foto)) { ?>
+          <div class="mb-2">
+            <img src="<?php echo base_url('uploads/kegiatan/' . rawurlencode($k->foto)); ?>" alt="Thumbnail <?php echo html_escape($k->nama_kegiatan); ?>" class="img-thumbnail" style="width: 180px; height: 110px; object-fit: cover;">
+          </div>
+          <?php } ?>
+          <input type="file" name="foto" id="foto" class="form-control" accept="image/jpeg,image/png">
+          <div class="form-text">Kosongkan jika tidak ingin mengganti foto. Maksimal 2 MB.</div>
+        </div>
+        <div class="mb-3">
           <label class="form-label">Deskripsi</label>
           <textarea name="deskripsi" id="deskripsi" class="form-control"><?php echo html_escape($k->deskripsi); ?></textarea>
         </div>
