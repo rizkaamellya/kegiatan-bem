@@ -28,7 +28,7 @@
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="#beranda"><span class="brand-mark">BEM</span><span><b>BEM KAMPUS</b><small>Badan Eksekutif Mahasiswa<br>Bergerak dan Berdampak</small></span></a>
   <button class="menu" aria-label="Buka menu" aria-expanded="false">☰</button>
-  <nav class="nav-links"><a class="active" href="#beranda">BERANDA</a><a href="#tentang">TENTANG KAMI</a><a href="<?php echo site_url('kegiatan'); ?>">KEGIATAN</a><a href="#dokumentasi">DOKUMENTASI</a><a href="#kontak">KONTAK</a><a class="login" href="<?php echo site_url('login'); ?>">♟ &nbsp; LOGIN ADMIN</a></nav>
+  <nav class="nav-links"><a class="active" href="#beranda">BERANDA</a><a href="#tentang">TENTANG KAMI</a><a href="<?php echo site_url('kegiatan'); ?>">KEGIATAN</a><a class="login" href="<?php echo site_url('login'); ?>">♟ &nbsp; LOGIN ADMIN</a></nav>
 </div></header>
 <main>
   <section class="hero" id="beranda"><div class="wrap"><div class="hero-copy"><span class="eyebrow">Selamat datang</span><h1>Wadah Aspirasi,<br>Ruang Aksi.</h1><p>Bersama membangun organisasi mahasiswa yang progresif, kolaboratif, dan memberi dampak nyata bagi kampus serta masyarakat.</p><a class="btn" href="<?php echo site_url('kegiatan'); ?>">LIHAT KEGIATAN <span>→</span></a></div></div></section>
