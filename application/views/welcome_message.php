@@ -1,100 +1,53 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<!doctype html>
+<html lang="id">
 <head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-		text-decoration: none;
-	}
-
-	a:hover {
-		color: #97310e;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-		min-height: 96px;
-	}
-
-	p {
-		margin: 0 0 10px;
-		padding:0;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal kegiatan Badan Eksekutif Mahasiswa">
+  <title>BEM Kampus — Bergerak, Berdampak, Bersama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#064f3a;--green-2:#08734d;--dark:#03392e;--lime:#a6ce39;--cream:#f7f9f4;--ink:#16342b;--muted:#60756e;--line:#dce6df;--shadow:0 18px 50px rgba(2,58,42,.13)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#fff;font-family:'DM Sans',sans-serif}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(3,61,45,.96);backdrop-filter:blur(14px);color:#fff;border-bottom:1px solid rgba(166,206,57,.3)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:flex;align-items:center;gap:12px;min-width:205px}.brand-mark{width:45px;height:45px;border:2px solid var(--lime);border-radius:50%;display:grid;place-items:center;font:800 18px Manrope;background:rgba(255,255,255,.06)}.brand b{display:block;font:800 19px Manrope;letter-spacing:.3px}.brand small{display:block;font-size:9px;opacity:.78;line-height:1.3}.nav-links{display:flex;align-items:center;gap:27px;font-size:12px;font-weight:700}.nav-links a{position:relative;padding:30px 0}.nav-links a:after{content:'';position:absolute;left:0;right:100%;bottom:18px;height:3px;background:var(--lime);transition:.25s}.nav-links a:hover:after,.nav-links a.active:after{right:0}.login{border:1px solid rgba(255,255,255,.8);border-radius:30px;padding:10px 17px!important}.login:after{display:none}.menu{display:none;border:0;background:none;color:#fff;font-size:27px}
+    .hero{position:relative;min-height:590px;color:#fff;background:#033e2e url('<?php echo base_url('assets/images/hero-bem.png'); ?>') center/cover no-repeat;display:flex;align-items:center;overflow:hidden}.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,56,40,.98) 0%,rgba(3,73,49,.87) 30%,rgba(3,65,46,.2) 62%,rgba(0,30,22,.18))}.hero:after{content:'';position:absolute;left:0;right:0;bottom:0;height:130px;background:linear-gradient(transparent,rgba(1,38,28,.65))}.hero-copy{position:relative;z-index:2;width:520px;padding:90px 0 150px}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#c8e879;font-weight:700;letter-spacing:2px;font-size:12px;text-transform:uppercase}.eyebrow:before{content:'';width:30px;height:2px;background:var(--lime)}h1{font:800 clamp(42px,5.4vw,72px)/1.03 Manrope;margin:18px 0 19px;letter-spacing:-2.5px}.hero p{font-size:18px;line-height:1.7;max-width:470px;color:rgba(255,255,255,.84);margin:0 0 28px}.btn{display:inline-flex;align-items:center;gap:12px;padding:14px 21px;border-radius:6px;background:var(--lime);color:#173c20;font-weight:800;font-size:13px;box-shadow:0 9px 24px rgba(100,156,29,.26);transition:.25s}.btn:hover{transform:translateY(-2px);background:#b8df49}.btn span{font-size:19px}
+    .pillars{position:relative;z-index:4;margin-top:-93px}.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);background:linear-gradient(135deg,#07563e,#034430);color:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.pillar{padding:31px 30px;display:grid;grid-template-columns:54px 1fr;gap:18px;position:relative}.pillar+.pillar:before{content:'';position:absolute;left:0;top:28px;bottom:28px;width:1px;background:rgba(255,255,255,.15)}.icon{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#bfe051,#73ab27);font-size:25px}.pillar h3{font:700 18px Manrope;margin:2px 0 8px}.pillar p{font-size:13px;line-height:1.65;color:rgba(255,255,255,.73);margin:0}.more{display:inline-block;margin-top:13px;font-size:11px;font-weight:700;letter-spacing:.5px;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px}
+    section{padding:86px 0}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:30px}.section-title{margin:0;font:800 25px Manrope;color:var(--green);display:flex;align-items:center;gap:13px}.section-title:before{content:'';width:5px;height:26px;background:var(--lime)}.all{font-size:12px;font-weight:800;color:var(--green)}.all span{color:var(--lime);font-size:18px;margin-left:7px}.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}.card{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(25,72,56,.06);transition:.3s}.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}.card-image{height:205px;background-image:linear-gradient(20deg,rgba(2,66,47,.22),transparent),url('<?php echo base_url('assets/images/hero-bem.png'); ?>');background-size:cover;position:relative}.card:nth-child(1) .card-image{background-position:70% 45%}.card:nth-child(2) .card-image{background-position:48% 38%}.card:nth-child(3) .card-image{background-position:92% 48%}.date{position:absolute;left:16px;top:16px;background:var(--green);color:#fff;border-radius:6px;padding:8px 10px;text-align:center;font-size:10px;line-height:1.2}.date b{font-size:18px;display:block}.card-body{padding:22px}.card h3{font:700 18px/1.4 Manrope;margin:0 0 9px}.card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 15px}.read{font-size:12px;color:var(--green-2);font-weight:700}
+    .gallery{background:linear-gradient(135deg,#064b38,#022f27);color:#fff;padding:68px 0}.gallery .section-title{color:#fff}.gallery .all{color:#fff}.gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.shot{margin:0}.shot-img{height:132px;border-radius:10px;background-image:linear-gradient(rgba(3,63,45,.06),rgba(3,63,45,.2)),url('<?php echo base_url('assets/images/hero-bem.png'); ?>');background-size:cover}.shot:nth-child(1) .shot-img{background-position:55% 42%}.shot:nth-child(2) .shot-img{background-position:70% 50%}.shot:nth-child(3) .shot-img{background-position:88% 45%}.shot:nth-child(4) .shot-img{background-position:42% 50%}.shot:nth-child(5) .shot-img{background-position:78% 35%}.shot:nth-child(6) .shot-img{background-position:62% 60%}.shot figcaption{text-align:center;font-size:11px;line-height:1.4;margin-top:10px;color:rgba(255,255,255,.82)}
+    .cta{background:linear-gradient(100deg,#0a7a4c,#5a9d22);color:#fff}.cta-row{min-height:112px;display:flex;align-items:center;justify-content:space-between;gap:30px}.cta-text{display:flex;align-items:center;gap:20px}.cta-icon{font-size:38px}.cta h2{font:700 22px Manrope;margin:0 0 5px}.cta p{margin:0;color:rgba(255,255,255,.78);font-size:13px}.cta .btn{background:#b5d83e;padding-inline:27px}
+    footer{background:#02382d;color:#fff;padding:48px 0 18px}.footer-grid{display:grid;grid-template-columns:1.25fr .9fr 1fr;gap:60px}.footer-brand p,.footer-links a,.contact p{font-size:12px;color:rgba(255,255,255,.72);line-height:1.7}.footer-brand .brand{margin-bottom:15px}.footer-brand p{max-width:280px}.footer h4{font:700 14px Manrope;margin:0 0 16px}.footer-links{display:grid;grid-template-columns:1fr 1fr;gap:9px 24px}.footer-links a:hover{color:var(--lime)}.contact p{margin:0 0 7px}.copyright{text-align:center;border-top:1px solid rgba(255,255,255,.1);padding-top:18px;margin-top:38px;font-size:11px;color:rgba(255,255,255,.6)}
+    @media(max-width:900px){.nav-links{position:absolute;display:none;top:78px;left:0;right:0;background:#033d2f;padding:18px 25px;flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:13px}.nav-links a:after{display:none}.menu{display:block}.hero{min-height:620px;background-position:58% center}.hero:before{background:linear-gradient(90deg,rgba(2,56,40,.96),rgba(2,56,40,.73) 65%,rgba(2,56,40,.35))}.hero-copy{padding-top:60px;width:65%}.pillar-grid{grid-template-columns:1fr}.pillar+.pillar:before{top:0;bottom:auto;left:30px;right:30px;width:auto;height:1px}.gallery-grid{grid-template-columns:repeat(3,1fr)}.footer-grid{gap:30px}}
+    @media(max-width:640px){.wrap{width:min(100% - 28px,1160px)}.brand small{display:none}.brand{min-width:0}.hero{min-height:620px;background-position:65% center}.hero:before{background:linear-gradient(90deg,rgba(2,56,40,.98),rgba(2,56,40,.8))}.hero-copy{width:100%;padding:65px 0 140px}h1{font-size:43px}.hero p{font-size:16px}.pillars{margin-top:-90px}.pillar{padding:25px 22px}.news-grid{grid-template-columns:1fr}.card-image{height:220px}section{padding:62px 0}.section-title{font-size:21px}.gallery-grid{grid-template-columns:repeat(2,1fr)}.shot-img{height:140px}.cta-row{padding:25px 0;align-items:flex-start;flex-direction:column}.cta-text{align-items:flex-start}.footer-grid{grid-template-columns:1fr}.footer-links{max-width:300px}}
+  </style>
 </head>
 <body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="userguide3/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
-
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="#beranda"><span class="brand-mark">BEM</span><span><b>BEM KAMPUS</b><small>Badan Eksekutif Mahasiswa<br>Bergerak dan Berdampak</small></span></a>
+  <button class="menu" aria-label="Buka menu" aria-expanded="false">☰</button>
+  <nav class="nav-links"><a class="active" href="#beranda">BERANDA</a><a href="#tentang">TENTANG KAMI</a><a href="#kegiatan">KEGIATAN</a><a href="#dokumentasi">DOKUMENTASI</a><a href="#kontak">KONTAK</a><a class="login" href="<?php echo site_url('AdminController'); ?>">♟ &nbsp; LOGIN ADMIN</a></nav>
+</div></header>
+<main>
+  <section class="hero" id="beranda"><div class="wrap"><div class="hero-copy"><span class="eyebrow">Selamat datang</span><h1>Wadah Aspirasi,<br>Ruang Aksi.</h1><p>Bersama membangun organisasi mahasiswa yang progresif, kolaboratif, dan memberi dampak nyata bagi kampus serta masyarakat.</p><a class="btn" href="#kegiatan">LIHAT KEGIATAN <span>→</span></a></div></div></section>
+  <div class="pillars" id="tentang"><div class="wrap"><div class="pillar-grid">
+    <article class="pillar"><div class="icon">◎</div><div><h3>Visi BEM</h3><p>Menjadi organisasi mahasiswa yang progresif, inovatif, dan berintegritas dalam mewujudkan mahasiswa unggul.</p><a class="more" href="#">SELENGKAPNYA</a></div></article>
+    <article class="pillar"><div class="icon">◇</div><div><h3>Misi BEM</h3><p>Meningkatkan kualitas sumber daya mahasiswa melalui program yang edukatif, kreatif, dan kolaboratif.</p><a class="more" href="#">SELENGKAPNYA</a></div></article>
+    <article class="pillar"><div class="icon">♧</div><div><h3>Tujuan BEM</h3><p>Mewujudkan kegiatan bermanfaat bagi mahasiswa dan masyarakat serta membangun sinergi di seluruh kampus.</p><a class="more" href="#">SELENGKAPNYA</a></div></article>
+  </div></div></div>
+  <section id="kegiatan"><div class="wrap"><div class="section-head"><h2 class="section-title">Berita Terkini</h2><a class="all" href="#">LIHAT SEMUA <span>›</span></a></div><div class="news-grid">
+    <article class="card"><div class="card-image"><span class="date"><b>10</b>MEI<br>2025</span></div><div class="card-body"><h3>Rapat Koordinasi Program Kerja BEM</h3><p>Persiapan program kerja dan kolaborasi lintas divisi untuk satu periode kepengurusan.</p><a class="read" href="#">Baca selengkapnya &nbsp;→</a></div></article>
+    <article class="card"><div class="card-image"><span class="date"><b>02</b>MEI<br>2025</span></div><div class="card-body"><h3>Pelatihan Kepemimpinan Mahasiswa</h3><p>Membentuk jiwa kepemimpinan mahasiswa yang aktif, adaptif, dan berkarakter.</p><a class="read" href="#">Baca selengkapnya &nbsp;→</a></div></article>
+    <article class="card"><div class="card-image"><span class="date"><b>28</b>APR<br>2025</span></div><div class="card-body"><h3>Bakti Sosial dan Lingkungan</h3><p>Gerakan bersama merawat lingkungan sekaligus berbagi kepada masyarakat sekitar.</p><a class="read" href="#">Baca selengkapnya &nbsp;→</a></div></article>
+  </div></div></section>
+  <section class="gallery" id="dokumentasi"><div class="wrap"><div class="section-head"><h2 class="section-title">Dokumentasi Kegiatan</h2><a class="all" href="#">LIHAT SEMUA <span>›</span></a></div><div class="gallery-grid">
+    <figure class="shot"><div class="shot-img"></div><figcaption>Seminar Nasional<br>Kemahasiswaan</figcaption></figure><figure class="shot"><div class="shot-img"></div><figcaption>Workshop Penulisan<br>Ilmiah</figcaption></figure><figure class="shot"><div class="shot-img"></div><figcaption>Pengabdian<br>Masyarakat</figcaption></figure><figure class="shot"><div class="shot-img"></div><figcaption>Musyawarah Besar<br>Mahasiswa</figcaption></figure><figure class="shot"><div class="shot-img"></div><figcaption>Lomba Cerdas<br>Cermat</figcaption></figure><figure class="shot"><div class="shot-img"></div><figcaption>Buka Bersama<br>BEM Kampus</figcaption></figure>
+  </div></div></section>
+  <div class="cta"><div class="wrap cta-row"><div class="cta-text"><div class="cta-icon">▦</div><div><h2>Yuk, Ikuti Setiap Kegiatan BEM!</h2><p>Bersama kita ciptakan perubahan dan karya nyata untuk kampus dan masyarakat.</p></div></div><a class="btn" href="#kegiatan">LIHAT KEGIATAN</a></div></div>
+</main>
+<footer id="kontak"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><div class="brand"><span class="brand-mark">BEM</span><span><b>BEM KAMPUS</b><small>Badan Eksekutif Mahasiswa</small></span></div><p>Ruang tumbuh, berkolaborasi, serta menyampaikan aspirasi untuk seluruh mahasiswa.</p></div><div><h4>Tautan Cepat</h4><div class="footer-links"><a href="#beranda">Beranda</a><a href="#dokumentasi">Dokumentasi</a><a href="#tentang">Tentang Kami</a><a href="#kegiatan">Kegiatan</a><a href="#kontak">Kontak</a><a href="<?php echo site_url('AdminController'); ?>">Admin</a></div></div><div class="contact"><h4>Kontak Kami</h4><p>⌖ &nbsp; Sekretariat BEM, Area Kampus</p><p>✉ &nbsp; bem@kampus.ac.id</p><p>◎ &nbsp; @bem_kampus</p></div></div><div class="copyright">© <?php echo date('Y'); ?> BEM Kampus. All Rights Reserved.</div></div></footer>
+<script>const b=document.querySelector('.menu'),n=document.querySelector('.nav-links');b.addEventListener('click',()=>{n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'))});document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>n.classList.remove('open')));</script>
 </body>
 </html>
