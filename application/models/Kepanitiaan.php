@@ -16,6 +16,13 @@ class Kepanitiaan extends CI_Model {
         return $this->db->get('kepanitiaan')->result();
     }
 
+    public function ambilKepanitiaanBerdasarkanKegiatan($idKegiatan) {
+        $this->db->where('id_kegiatan', $idKegiatan);
+        $this->db->order_by('id_kepanitiaan', 'ASC');
+
+        return $this->db->get('kepanitiaan')->result();
+    }
+
     public function ubahKepanitiaan($kepanitiaan, $idKepanitiaan) {
         $this->db->where('id_kepanitiaan', $idKepanitiaan);
         $this->db->update('kepanitiaan', $kepanitiaan);

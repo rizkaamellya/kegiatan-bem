@@ -6,6 +6,8 @@ class KegiatanPublikController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Kegiatan');
+        $this->load->model('Kepanitiaan');
+        $this->load->model('Keuangan');
     }
 
     public function index() {
@@ -20,6 +22,8 @@ class KegiatanPublikController extends CI_Controller {
         }
 
         $data['kegiatan'] = $kegiatan[0];
+        $data['kepanitiaan'] = $this->Kepanitiaan->ambilKepanitiaanBerdasarkanKegiatan($idKegiatan);
+        $data['keuangan'] = $this->Keuangan->ambilKeuanganBerdasarkanKegiatan($idKegiatan);
         $this->load->view('KegiatanDetailView', $data);
     }
 }
