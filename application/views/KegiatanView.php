@@ -100,15 +100,17 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/kegiatan">Kegiatan</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a>
             </li>
           </ul>
+          <span class="navbar-text me-3"><?php echo html_escape($this->session->userdata('admin_username')); ?></span>
+          <a class="btn btn-outline-light btn-sm" href="<?php echo site_url('logout'); ?>">Keluar</a>
         </div>
       </div>
     </nav>
@@ -116,7 +118,7 @@
       <div class="card">
         <h5 class="card-header text-center">Data Kegiatan</h5>
         <div class="card-body">
-           <a href="<?php echo base_url(); ?>index.php/kegiatan/new">
+           <a href="<?php echo base_url(); ?>index.php/root/kegiatan/new">
            <button type="button" class="btn btn-primary">Tambah</button>
           </a>
           <table class="table">
@@ -139,8 +141,8 @@
                   <?php echo !empty($k->deskripsi) ? html_escape(substr(strip_tags($k->deskripsi), 0, 80)) : '-'; ?>
                 </td>
                 <td>
-                  <a href="<?php echo base_url(); ?>index.php/kegiatan/edit/<?php echo $k->id_kegiatan; ?>" class="btn btn-success">Ubah</a>
-                  <a href="<?php echo base_url(); ?>index.php/kegiatan/delete/<?php echo $k->id_kegiatan; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
+                  <a href="<?php echo base_url(); ?>index.php/root/kegiatan/edit/<?php echo $k->id_kegiatan; ?>" class="btn btn-success">Ubah</a>
+                  <a href="<?php echo base_url(); ?>index.php/root/kegiatan/delete/<?php echo $k->id_kegiatan; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
                 </td>
               </tr>
               <?php } ?>

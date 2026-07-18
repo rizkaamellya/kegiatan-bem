@@ -11,7 +11,7 @@
     </nav>
     <main class="container">
       <h3 class="text-center mb-4">Tambah Admin</h3>
-      <form method="post" action="<?php echo base_url(); ?>index.php/admin">
+      <form method="post" action="<?php echo base_url(); ?>index.php/root/admin">
         <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" name="username" class="form-control" required>
@@ -21,7 +21,7 @@
           <input type="password" name="password" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="<?php echo base_url(); ?>index.php/admin" class="btn btn-secondary">Batal</a>
+        <a href="<?php echo base_url(); ?>index.php/root/admin" class="btn btn-secondary">Batal</a>
       </form>
     </main>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>

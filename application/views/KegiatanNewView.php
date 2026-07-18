@@ -101,20 +101,20 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/kegiatan">Kegiatan</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">kepanitian</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">kepanitian</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <main class="container">
-      <form method="post" action="<?php echo base_url(); ?>index.php/kegiatan" enctype="multipart/form-data">
+      <form method="post" action="<?php echo base_url(); ?>index.php/root/kegiatan" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Nama Kegiatan</label>
             <input type="text" name="nama_kegiatan" class="form-control">
@@ -138,7 +138,7 @@
 				<?php echo base_url(); ?>assets/js/bootstrap.min.js">
     </script>
     <script>
-      var editorUploadUrl = '<?php echo base_url(); ?>index.php/kegiatan/upload-editor';
+      var editorUploadUrl = '<?php echo base_url(); ?>index.php/root/kegiatan/upload-editor';
 
       function uploadEditorFile(file) {
         var formData = new FormData();

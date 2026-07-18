@@ -9,11 +9,13 @@
         <a class="navbar-brand" href="#">Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/kegiatan">Kegiatan</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/kepanitiaan">Kepanitiaan</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/keuangan">Keuangan</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/admin">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">Kepanitiaan</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/root/admin">Admin</a></li>
           </ul>
+          <span class="navbar-text me-3"><?php echo html_escape($this->session->userdata('admin_username')); ?></span>
+          <a class="btn btn-outline-light btn-sm" href="<?php echo site_url('logout'); ?>">Keluar</a>
         </div>
       </div>
     </nav>
@@ -21,7 +23,7 @@
       <div class="card">
         <h5 class="card-header text-center">Data Admin</h5>
         <div class="card-body">
-          <a href="<?php echo base_url(); ?>index.php/admin/new" class="btn btn-primary">Tambah</a>
+          <a href="<?php echo base_url(); ?>index.php/root/admin/new" class="btn btn-primary">Tambah</a>
           <table class="table">
             <thead>
               <tr>
@@ -34,8 +36,8 @@
               <tr>
                 <td><?php echo html_escape($a->username); ?></td>
                 <td>
-                  <a href="<?php echo base_url(); ?>index.php/admin/edit/<?php echo $a->id_admin; ?>" class="btn btn-success">Ubah</a>
-                  <a href="<?php echo base_url(); ?>index.php/admin/delete/<?php echo $a->id_admin; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
+                  <a href="<?php echo base_url(); ?>index.php/root/admin/edit/<?php echo $a->id_admin; ?>" class="btn btn-success">Ubah</a>
+                  <a href="<?php echo base_url(); ?>index.php/root/admin/delete/<?php echo $a->id_admin; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
                 </td>
               </tr>
               <?php } ?>

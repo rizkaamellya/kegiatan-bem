@@ -1,6 +1,6 @@
 <?php
 
-class KegiatanController extends CI_Controller {
+class KegiatanController extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -74,7 +74,7 @@ class KegiatanController extends CI_Controller {
             'deskripsi' => $this->input->post('deskripsi')
         );    
         $this->Kegiatan->tambahKegiatan($val);
-        redirect('kegiatan');
+        redirect('root/kegiatan');
     }
 
     public function editKegiatan($idKegiatan) {
@@ -120,7 +120,7 @@ class KegiatanController extends CI_Controller {
         }
 
         $this->Kegiatan->ubahKegiatan($val, $idKegiatan);
-        redirect('kegiatan');
+        redirect('root/kegiatan');
     }
 
     public function hapusKegiatan($idKegiatan) {
@@ -138,7 +138,7 @@ class KegiatanController extends CI_Controller {
             }
         }
         $this->Kegiatan->hapusKegiatan($idKegiatan);
-        redirect('kegiatan');
+        redirect('root/kegiatan');
     }
 
 }

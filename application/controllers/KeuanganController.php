@@ -1,6 +1,6 @@
 <?php
 
-class KeuanganController extends CI_Controller {
+class KeuanganController extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -33,7 +33,7 @@ class KeuanganController extends CI_Controller {
            
          );    
         $this->Keuangan->tambahKeuangan($val);
-        redirect('keuangan');
+        redirect('root/keuangan');
     }
 
     public function editKeuangan($idKeuangan) {
@@ -51,12 +51,12 @@ class KeuanganController extends CI_Controller {
             'tanggal' => $this->input->post('tanggal')
         );
         $this->Keuangan->ubahKeuangan($val, $this->input->post('id_keuangan'));
-        redirect('keuangan');
+        redirect('root/keuangan');
     }
 
     public function hapusKeuangan($idKeuangan) {
         $this->Keuangan->hapusKeuangan($idKeuangan);
-        redirect('keuangan');
+        redirect('root/keuangan');
     }
 
 }

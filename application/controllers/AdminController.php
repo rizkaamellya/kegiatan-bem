@@ -1,6 +1,6 @@
 <?php
 
-class AdminController extends CI_Controller {
+class AdminController extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -20,10 +20,10 @@ class AdminController extends CI_Controller {
     public function tambahAdmin() {
         $val = array(
             'username' => $this->input->post('username'),
-            'password' => $this->input->post('password')
+            'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
         );
         $this->Admin->tambahAdmin($val);
-        redirect('admin');
+        redirect('root/admin');
     }
 
     public function editAdmin($idAdmin) {
@@ -32,17 +32,17 @@ class AdminController extends CI_Controller {
     }
 
     public function updateAdmin() {
-        $val = array(
-            'username' => $this->input->post('username'),
-            'password' => $this->input->post('password')
-        );
+        $val = array('username' => $this->input->post('username'));
+        if ($this->input->post('password') !== '') {
+            $val['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+        }
         $this->Admin->ubahAdmin($val, $this->input->post('id_admin'));
-        redirect('admin');
+        redirect('root/admin');
     }
 
     public function hapusAdmin($idAdmin) {
         $this->Admin->hapusAdmin($idAdmin);
-        redirect('admin');
+        redirect('root/admin');
     }
 
 }

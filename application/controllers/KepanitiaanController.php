@@ -1,6 +1,6 @@
 <?php
 
-class KepanitiaanController extends CI_Controller {
+class KepanitiaanController extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -31,7 +31,7 @@ class KepanitiaanController extends CI_Controller {
            
          );    
         $this->Kepanitiaan->tambahKepanitiaan($val);
-        redirect('kepanitiaan');
+        redirect('root/kepanitiaan');
     }
 
     public function editKepanitiaan($idKepanitiaan) {
@@ -47,12 +47,12 @@ class KepanitiaanController extends CI_Controller {
             'jabatan' => $this->input->post('jabatan')
         );
         $this->Kepanitiaan->ubahKepanitiaan($val, $this->input->post('id_kepanitiaan'));
-        redirect('kepanitiaan');
+        redirect('root/kepanitiaan');
     }
 
     public function hapusKepanitiaan($idKepanitiaan) {
         $this->Kepanitiaan->hapuskepanitiaan($idKepanitiaan);
-        redirect('kepanitiaan');
+        redirect('root/kepanitiaan');
     }
 
 }

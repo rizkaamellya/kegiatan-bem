@@ -50,34 +50,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['kegiatan']['GET'] = 'KegiatanController/index';
-$route['kegiatan/new']['GET'] = 'KegiatanController/newKegiatan';
-$route['kegiatan']['POST'] = 'KegiatanController/tambahKegiatan';
-$route['kegiatan/edit/(:num)']['GET'] = 'KegiatanController/editKegiatan/$1';
-$route['kegiatan/update']['POST'] = 'KegiatanController/updateKegiatan';
-$route['kegiatan/upload-editor']['POST'] = 'KegiatanController/uploadEditor';
-$route['kegiatan/delete/(:num)']['GET'] = 'KegiatanController/hapusKegiatan/$1';
+$route['root/kegiatan']['GET'] = 'KegiatanController/index';
+$route['root/kegiatan/new']['GET'] = 'KegiatanController/newKegiatan';
+$route['root/kegiatan']['POST'] = 'KegiatanController/tambahKegiatan';
+$route['root/kegiatan/edit/(:num)']['GET'] = 'KegiatanController/editKegiatan/$1';
+$route['root/kegiatan/update']['POST'] = 'KegiatanController/updateKegiatan';
+$route['root/kegiatan/upload-editor']['POST'] = 'KegiatanController/uploadEditor';
+$route['root/kegiatan/delete/(:num)']['GET'] = 'KegiatanController/hapusKegiatan/$1';
 
-$route['kepanitiaan']['GET'] = 'KepanitiaanController/index';
-$route['kepanitiaan/new']['GET'] = 'KepanitiaanController/newKepanitiaan';
-$route['kepanitiaan']['POST'] = 'KepanitiaanController/tambahKepanitiaan';
-$route['kepanitiaan/edit/(:num)']['GET'] = 'KepanitiaanController/editKepanitiaan/$1';
-$route['kepanitiaan/update']['POST'] = 'KepanitiaanController/updateKepanitiaan';
-$route['kepanitiaan/delete/(:num)']['GET'] = 'KepanitiaanController/hapusKepanitiaan/$1';
+$route['root/kepanitiaan']['GET'] = 'KepanitiaanController/index';
+$route['root/kepanitiaan/new']['GET'] = 'KepanitiaanController/newKepanitiaan';
+$route['root/kepanitiaan']['POST'] = 'KepanitiaanController/tambahKepanitiaan';
+$route['root/kepanitiaan/edit/(:num)']['GET'] = 'KepanitiaanController/editKepanitiaan/$1';
+$route['root/kepanitiaan/update']['POST'] = 'KepanitiaanController/updateKepanitiaan';
+$route['root/kepanitiaan/delete/(:num)']['GET'] = 'KepanitiaanController/hapusKepanitiaan/$1';
 
-$route['keuangan']['GET'] = 'KeuanganController/index';
-$route['keuangan/new']['GET'] = 'KeuanganController/newKeuangan';
-$route['keuangan']['POST'] = 'KeuanganController/tambahKeuangan';
-$route['keuangan/edit/(:num)']['GET'] = 'KeuanganController/editKeuangan/$1';
-$route['keuangan/update']['POST'] = 'KeuanganController/updateKeuangan';
-$route['keuangan/delete/(:num)']['GET'] = 'KeuanganController/hapusKeuangan/$1';
+$route['root/keuangan']['GET'] = 'KeuanganController/index';
+$route['root/keuangan/new']['GET'] = 'KeuanganController/newKeuangan';
+$route['root/keuangan']['POST'] = 'KeuanganController/tambahKeuangan';
+$route['root/keuangan/edit/(:num)']['GET'] = 'KeuanganController/editKeuangan/$1';
+$route['root/keuangan/update']['POST'] = 'KeuanganController/updateKeuangan';
+$route['root/keuangan/delete/(:num)']['GET'] = 'KeuanganController/hapusKeuangan/$1';
 
-$route['admin']['GET'] = 'AdminController/index';
-$route['admin/new']['GET'] = 'AdminController/newAdmin';
-$route['admin']['POST'] = 'AdminController/tambahAdmin';
-$route['admin/edit/(:num)']['GET'] = 'AdminController/editAdmin/$1';
-$route['admin/update']['POST'] = 'AdminController/updateAdmin';
-$route['admin/delete/(:num)']['GET'] = 'AdminController/hapusAdmin/$1';
+$route['root/admin']['GET'] = 'AdminController/index';
+$route['root/admin/new']['GET'] = 'AdminController/newAdmin';
+$route['root/admin']['POST'] = 'AdminController/tambahAdmin';
+$route['root/admin/edit/(:num)']['GET'] = 'AdminController/editAdmin/$1';
+$route['root/admin/update']['POST'] = 'AdminController/updateAdmin';
+$route['root/admin/delete/(:num)']['GET'] = 'AdminController/hapusAdmin/$1';
+
+$route['login']['GET'] = 'AuthController/login';
+$route['login']['POST'] = 'AuthController/authenticate';
+$route['logout']['GET'] = 'AuthController/logout';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';

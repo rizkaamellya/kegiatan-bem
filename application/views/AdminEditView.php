@@ -13,7 +13,7 @@
       <?php $a = !empty($admin) ? $admin[0] : null; ?>
       <h3 class="text-center mb-4">Edit Admin</h3>
       <?php if ($a) { ?>
-      <form method="post" action="<?php echo base_url(); ?>index.php/admin/update">
+      <form method="post" action="<?php echo base_url(); ?>index.php/root/admin/update">
         <input type="hidden" name="id_admin" value="<?php echo $a->id_admin; ?>">
         <div class="mb-3">
           <label class="form-label">Username</label>
@@ -21,10 +21,11 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" value="<?php echo html_escape($a->password); ?>" required>
+          <input type="password" name="password" class="form-control" autocomplete="new-password">
+          <div class="form-text">Kosongkan jika password tidak ingin diubah.</div>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="<?php echo base_url(); ?>index.php/admin" class="btn btn-secondary">Batal</a>
+        <a href="<?php echo base_url(); ?>index.php/root/admin" class="btn btn-secondary">Batal</a>
       </form>
       <?php } else { ?>
       <div class="alert alert-warning">Data admin tidak ditemukan.</div>
