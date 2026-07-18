@@ -12,6 +12,10 @@ CREATE TABLE IF NOT EXISTS admin (
   UNIQUE KEY uq_admin_username (username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- Akun admin awal: username admin, password admin123
+INSERT IGNORE INTO admin (username, password) VALUES
+  ('admin', '$2y$10$7RpxuxTTW.hC1vXpfC.MpOw30.jEZRm1b.omIYyFTGWBFRwv7Ug1q');
+
 CREATE TABLE IF NOT EXISTS kegiatan (
   id_kegiatan INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nama_kegiatan VARCHAR(150) NOT NULL,
