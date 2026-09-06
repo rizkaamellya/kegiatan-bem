@@ -68,33 +68,39 @@
       .page-container { box-shadow: none; width: 100%; padding: 0; margin: 0; min-height: auto; outline: none !important; background: none !important; }
       [contenteditable="true"] { outline: none !important; background: none !important; }
     }
+    /* Layout PDF */
+    @page { size: A4 landscape; margin: 1.2cm 1.5cm; }
+    body { background: #fff; font-size: 10pt; }
+    .page-container { width: 100%; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+    .kop-surat { display: table; width: 100%; border-collapse: collapse; padding-bottom: 10px; margin-bottom: 16px; }
+    .kop-surat td { vertical-align: middle; }
+    .kop-logo { display: inline-block; }
+    .kop-logo-bem { width: 80px; height: 80px; }
+    .kop-logo-kampus { width: 136px; height: 80px; }
+    .kop-text { text-align: center; padding: 0 15px; }
+    .doc-title { margin-bottom: 16px; }
+    table.data-table { margin-top: 10px; font-size: 9pt; }
+    table.data-table th, table.data-table td { padding: 6px 8px; }
+    .signature-block { display: table; width: 100%; margin-top: 22px; border-collapse: collapse; page-break-inside: avoid; }
+    .sig-column { width: 50%; text-align: center; vertical-align: top; }
+    .sig-title { height: 42px; margin: 0; line-height: 1.35; }
+    .sig-space { height: 38px; }
   </style>
 </head>
 <body>
 
-  <div class="print-actions">
-    <button onclick="window.print();" class="btn-print">🖨️ Cetak / Simpan PDF</button>
-    <button type="button" onclick="tambahBaris()" class="btn-add-row">➕ Tambah Baris Tabel</button>
-    <button type="button" onclick="hapusBaris()" class="btn-del-row">🗑️ Hapus Baris</button>
-    <button type="button" onclick="tambahTeks()" class="btn-add-text">📝 Tambah Paragraf</button>
-    <button type="button" onclick="toggleEditMode()" id="btnToggleEdit" class="btn-edit">✏️ Mode Edit: AKTIF</button>
-    <button type="button" onclick="location.reload()" class="btn-reset">↺ Reset Teks</button>
-    <a href="<?php echo site_url('root/cetak'); ?>" class="btn-back">← Kembali</a>
-    <div class="edit-hint">💡 <strong>Mode Edit Aktif:</strong> Anda dapat mengeklik &amp; mengedit SEMUA teks (Kop, Judul, Sel Tabel, Tanda Tangan, Nama, NIM) serta menambah/menghapus baris secara bebas!</div>
-  </div>
-
-  <div class="page-container" id="printableArea" contenteditable="true">
+  <div class="page-container">
     <!-- Kop Surat: Logo BEM di KIRI, Logo Kampus INAR di KANAN -->
-    <div class="kop-surat">
-      <img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" class="kop-logo kop-logo-bem">
-      <div class="kop-text">
+    <table class="kop-surat"><tr>
+      <td style="width: 14%; text-align: left;"><img src="<?php echo $logo_bem; ?>" alt="Logo BEM" class="kop-logo kop-logo-bem"></td>
+      <td class="kop-text" style="width: 64%;">
         <h3>BADAN EKSEKUTIF MAHASISWA</h3>
         <h2>INSTITUT ILMU KESEHATAN DAN TEKNOLOGI NURDIN ABDURRAHMAN</h2>
         <p>Sekretariat: Gedung Student Center Lt. 2, Sigli, Kab. Pidie, Aceh</p>
         <p>Email: bem@inar.ac.id | Website: www.bem-inar.ac.id</p>
-      </div>
-      <img src="<?php echo base_url('assets/images/logo-inar.png'); ?>" alt="Logo Kampus INAR" class="kop-logo kop-logo-kampus">
-    </div>
+      </td>
+      <td style="width: 22%; text-align: right;"><img src="<?php echo $logo_inar; ?>" alt="Logo Kampus INAR" class="kop-logo kop-logo-kampus"></td>
+    </tr></table>
 
     <div class="doc-title">
       <h4>LAPORAN DATA KEGIATAN &amp; PROGRAM KERJA</h4>
@@ -141,92 +147,20 @@
       </tbody>
     </table>
 
-    <div class="signature-block">
-      <div class="sig-column">
-        <p>Mengetahui,<br><strong>Ketua BEM</strong></p>
+    <table class="signature-block"><tr>
+      <td class="sig-column">
+        <p class="sig-title">Mengetahui,<br><strong>Ketua BEM</strong></p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 9pt; margin:0;">NIM. ........................................</p>
-      </div>
-      <div class="sig-column">
-        <p>Sigli, <?php echo date('d F Y'); ?><br><strong>Sekretaris Umum</strong></p>
+      </td>
+      <td class="sig-column">
+        <p class="sig-title">Sigli, <?php echo date('d F Y'); ?><br><strong>Sekretaris Umum</strong></p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 9pt; margin:0;">NIM. ........................................</p>
-      </div>
-    </div>
+      </td>
+    </tr></table>
   </div>
-
-  <script>
-    function makeEverythingEditable() {
-      const area = document.getElementById('printableArea');
-      if (!area) return;
-      area.setAttribute('contenteditable', 'true');
-      const nodes = area.querySelectorAll('p, h1, h2, h3, h4, h5, td, th, span, div, strong');
-      nodes.forEach(el => el.setAttribute('contenteditable', 'true'));
-    }
-
-    let isEditMode = true;
-    function toggleEditMode() {
-      const area = document.getElementById('printableArea');
-      const btn = document.getElementById('btnToggleEdit');
-      isEditMode = !isEditMode;
-      const nodes = area.querySelectorAll('[contenteditable]');
-      nodes.forEach(el => el.setAttribute('contenteditable', isEditMode ? 'true' : 'false'));
-      area.setAttribute('contenteditable', isEditMode ? 'true' : 'false');
-      
-      if (isEditMode) {
-        btn.innerHTML = '✏️ Mode Edit: AKTIF';
-        btn.style.background = '#f39c12';
-      } else {
-        btn.innerHTML = '🔒 Mode Edit: NONAKTIF';
-        btn.style.background = '#95a5a6';
-      }
-    }
-
-    function tambahBaris() {
-      const tbody = document.querySelector('#printableArea table.data-table tbody');
-      if (!tbody) return;
-      const colCount = document.querySelectorAll('#printableArea table.data-table th').length || 5;
-      const rowCount = tbody.querySelectorAll('tr').length + 1;
-      const tr = document.createElement('tr');
-      
-      let cellsHTML = `<td class="text-center" contenteditable="true">${rowCount}</td>`;
-      for (let i = 1; i < colCount; i++) {
-        cellsHTML += `<td contenteditable="true">Data Baru ${i}</td>`;
-      }
-      tr.innerHTML = cellsHTML;
-      tbody.appendChild(tr);
-      makeEverythingEditable();
-    }
-
-    function hapusBaris() {
-      const tbody = document.querySelector('#printableArea table.data-table tbody');
-      if (!tbody) return;
-      const rows = tbody.querySelectorAll('tr');
-      if (rows.length > 0) {
-        rows[rows.length - 1].remove();
-      }
-    }
-
-    function tambahTeks() {
-      const area = document.getElementById('printableArea');
-      if (!area) return;
-      const p = document.createElement('p');
-      p.setAttribute('contenteditable', 'true');
-      p.style.marginTop = '15px';
-      p.style.fontSize = '11pt';
-      p.innerText = 'Tulis catatan atau informasi tambahan di sini...';
-      const sigBlock = area.querySelector('.signature-block');
-      if (sigBlock) {
-        area.insertBefore(p, sigBlock);
-      } else {
-        area.appendChild(p);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', makeEverythingEditable);
-    makeEverythingEditable();
-  </script>
 </body>
 </html>

@@ -60,7 +60,7 @@ class CetakController extends CI_Controller {
         $data['periode_tahun'] = $periode_tahun;
         $data['semester'] = $semester;
         $data['title'] = 'Laporan Data Kegiatan BEM';
-        $this->load->view('cetak/CetakKegiatanView', $data);
+        $this->renderReportView('cetak/CetakKegiatanView', $data, 'Data-Kegiatan-BEM.pdf', 'landscape');
     }
 
     public function cetakKegiatanDetail($idKegiatan) {
@@ -208,7 +208,7 @@ class CetakController extends CI_Controller {
         $data['kegiatan_list'] = $this->Kegiatan->ambilKegiatan();
         $data['selected_kegiatan'] = $idKegiatan;
         $data['title'] = 'Laporan Keuangan BEM';
-        $this->load->view('cetak/CetakKeuanganView', $data);
+        $this->renderReportView('cetak/CetakKeuanganView', $data, 'Laporan-Keuangan-BEM.pdf', 'landscape');
     }
 
     public function cetakKepanitiaan() {
@@ -227,6 +227,13 @@ class CetakController extends CI_Controller {
         $data['kegiatan_list'] = $this->Kegiatan->ambilKegiatan();
         $data['selected_kegiatan'] = $idKegiatan;
         $data['title'] = 'Laporan Kepanitiaan BEM';
-        $this->load->view('cetak/CetakKepanitiaanView', $data);
+        $this->renderReportView('cetak/CetakKepanitiaanView', $data, 'Laporan-Kepanitiaan-BEM.pdf', 'portrait');
+    }
+
+    private function renderReportView($view, $data, $filename, $orientation) {
+        $data['logo_bem'] = $this->imageDataUri(FCPATH . 'assets/images/logo-bem.png');
+        $data['logo_inar'] = $this->imageDataUri(FCPATH . 'assets/images/logo-inar.png');
+        $html = $this->load->view($view, $data, TRUE);
+        $this->renderPdf($html, $filename, $orientation);
     }
 }
