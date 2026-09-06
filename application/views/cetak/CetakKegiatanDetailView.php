@@ -41,9 +41,10 @@
     .description-box { border: 1px solid #ccc; padding: 10px 14px; background: #fafafa; border-radius: 4px; font-size: 10pt; line-height: 1.6; }
     
     /* Signatures */
-    .signature-block { margin-top: 40px; width: 100%; border-collapse: collapse; page-break-inside: avoid; }
+    .signature-block { margin-top: 22px; width: 100%; border-collapse: collapse; page-break-inside: avoid; }
     .sig-column { text-align: center; width: 33.33%; vertical-align: top; }
-    .sig-space { height: 65px; }
+    .sig-title { height: 48px; margin: 0; line-height: 1.35; }
+    .sig-space { height: 38px; }
     .sig-name { font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
     
   </style>
@@ -168,19 +169,19 @@
     <!-- Signature Block -->
     <table class="signature-block"><tr>
       <td class="sig-column">
-        <p>Ketua Pelaksana</p>
+        <p class="sig-title">Ketua Pelaksana</p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 8.5pt; margin:0;">NIM. ........................................</p>
       </td>
       <td class="sig-column">
-        <p>Bendahara BEM</p>
+        <p class="sig-title">Bendahara BEM</p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 8.5pt; margin:0;">NIM. ........................................</p>
       </td>
       <td class="sig-column">
-        <p>Sigli, <?php echo date('d F Y'); ?><br>Mengetahui,<br>Ketua BEM</p>
+        <p class="sig-title">Sigli, <?php echo date('d F Y'); ?><br>Mengetahui,<br>Ketua BEM</p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 8.5pt; margin:0;">NIM. ........................................</p>
