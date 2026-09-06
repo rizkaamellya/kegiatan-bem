@@ -44,7 +44,11 @@ class CetakController extends CI_Controller {
         $data['total_panitia'] = $total_panitia;
         $data['total_biaya'] = $total_biaya;
         $data['title'] = 'Laporan Rekapitulasi Keseluruhan Kegiatan BEM';
-        $this->load->view('cetak/CetakRekapKeseluruhanView', $data);
+        $data['logo_bem'] = $this->imageDataUri(FCPATH . 'assets/images/logo-bem.png');
+        $data['logo_inar'] = $this->imageDataUri(FCPATH . 'assets/images/logo-inar.png');
+
+        $html = $this->load->view('cetak/CetakRekapKeseluruhanView', $data, TRUE);
+        $this->renderPdf($html, 'Rekap-Kegiatan-BEM.pdf', 'landscape');
     }
 
     public function cetakKegiatan() {
@@ -83,6 +87,11 @@ class CetakController extends CI_Controller {
 
         $html = $this->load->view('cetak/CetakKegiatanDetailView', $data, TRUE);
 
+        $filename = 'LPJ-' . $this->safeFilename($kegiatan[0]->nama_kegiatan) . '.pdf';
+        $this->renderPdf($html, $filename, 'portrait');
+    }
+
+    private function renderPdf($html, $filename, $orientation) {
         require_once APPPATH . 'third_party/dompdf/dompdf/autoload.inc.php';
 
         $options = new Dompdf\Options();
@@ -91,11 +100,10 @@ class CetakController extends CI_Controller {
         $options->set('defaultFont', 'Times-Roman');
         $options->setChroot(FCPATH);
 
-        $filename = 'LPJ-' . $this->safeFilename($kegiatan[0]->nama_kegiatan) . '.pdf';
         if (class_exists('DOMImplementation')) {
             $pdf = new Dompdf\Dompdf($options);
             $pdf->loadHtml($html, 'UTF-8');
-            $pdf->setPaper('A4', 'portrait');
+            $pdf->setPaper('A4', $orientation);
             $pdf->render();
             $pdf->stream($filename, array('Attachment' => FALSE));
             return;

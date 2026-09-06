@@ -6,19 +6,16 @@
   <style>
     @page { size: A4 landscape; margin: 1.2cm 1.5cm; }
     * { box-sizing: border-box; font-family: "Times New Roman", Times, serif; }
-    body { margin: 0; padding: 0; background: #f8f9fa; color: #000; font-size: 11pt; line-height: 1.4; }
-    .print-actions { background: #1a252f; padding: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-    .btn-print { background: #27ae60; color: #fff; border: none; padding: 8px 18px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; margin-right: 10px; }
-    .btn-print:hover { background: #219150; }
-    .btn-back { background: #7f8c8d; color: #fff; border: none; padding: 8px 18px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
-    .page-container { background: #fff; width: 297mm; min-height: 210mm; margin: 0 auto; padding: 18mm 20mm; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    body { margin: 0; padding: 0; color: #000; font-size: 11pt; line-height: 1.4; }
+    .page-container { width: 100%; margin: 0; padding: 0; }
     
     /* Kop Surat */
-    .kop-surat { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px double #000; padding-bottom: 12px; margin-bottom: 20px; }
-    .kop-logo { object-fit: contain; }
-    .kop-logo-bem { width: 85px; height: 85px; }
-    .kop-logo-kampus { width: 85px; height: 85px; }
-    .kop-text { text-align: center; flex-grow: 1; padding: 0 15px; }
+    .kop-surat { width: 100%; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 16px; border-collapse: collapse; }
+    .kop-surat td { vertical-align: middle; }
+    .kop-logo { display: inline-block; }
+    .kop-logo-bem { width: 80px; height: 80px; }
+    .kop-logo-kampus { width: 136px; height: 80px; }
+    .kop-text { text-align: center; padding: 0 15px; }
     .kop-text h3 { margin: 0; font-size: 12pt; text-transform: uppercase; font-weight: normal; letter-spacing: 0.5px; }
     .kop-text h2 { margin: 2px 0; font-size: 14pt; text-transform: uppercase; font-weight: bold; color: #064f3a; }
     .kop-text p { margin: 0; font-size: 9pt; font-family: Arial, sans-serif; color: #333; }
@@ -27,7 +24,8 @@
     .doc-title h4 { margin: 0; font-size: 13.5pt; text-transform: uppercase; text-decoration: underline; letter-spacing: 0.5px; }
     .doc-title p { margin: 3px 0 0; font-size: 9.5pt; font-family: Arial, sans-serif; color: #444; }
     
-    .summary-bar { display: flex; justify-content: space-between; background-color: #f1f8f4; border: 1px solid #c2e0d1; padding: 8px 15px; border-radius: 4px; margin-bottom: 15px; font-size: 10pt; font-family: Arial, sans-serif; }
+    .summary-bar { width: 100%; border-collapse: collapse; background-color: #f1f8f4; border: 1px solid #c2e0d1; margin-bottom: 15px; font-size: 10pt; font-family: Arial, sans-serif; }
+    .summary-bar td { width: 33.33%; padding: 8px 12px; vertical-align: middle; }
     
     table.data-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 9.5pt; }
     table.data-table th, table.data-table td { border: 1px solid #000; padding: 6px 8px; vertical-align: middle; }
@@ -38,66 +36,28 @@
     .text-right { text-align: right; }
     
     /* Signatures */
-    .signature-block { margin-top: 35px; display: flex; justify-content: space-between; page-break-inside: avoid; }
-    .sig-column { text-align: center; width: 30%; }
-    .sig-space { height: 60px; }
+    .signature-block { margin-top: 22px; width: 100%; border-collapse: collapse; page-break-inside: avoid; }
+    .sig-column { text-align: center; width: 33.33%; vertical-align: top; }
+    .sig-title { height: 42px; margin: 0; line-height: 1.35; }
+    .sig-space { height: 38px; }
     .sig-name { font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
     
-    .btn-add-row { background: #2980b9; color: #fff; border: none; padding: 8px 14px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-right: 6px; }
-    .btn-add-row:hover { background: #1c5980; }
-    .btn-del-row { background: #c0392b; color: #fff; border: none; padding: 8px 14px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-right: 6px; }
-    .btn-del-row:hover { background: #962d22; }
-    .btn-add-text { background: #8e44ad; color: #fff; border: none; padding: 8px 14px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-right: 6px; }
-    .btn-add-text:hover { background: #6c3483; }
-    .btn-edit { background: #f39c12; color: #fff; border: none; padding: 8px 14px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-right: 6px; }
-    .btn-edit:hover { background: #d68910; }
-    .btn-reset { background: #7f8c8d; color: #fff; border: none; padding: 8px 14px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-right: 6px; }
-    .btn-reset:hover { background: #616a6b; }
-    .edit-hint { color: #f1c40f; font-size: 12px; margin-top: 8px; font-family: Arial, sans-serif; }
-    
-    [contenteditable="true"]:hover {
-      outline: 1px dashed #f39c12 !important;
-      background-color: rgba(254, 249, 231, 0.6) !important;
-      cursor: text;
-    }
-    [contenteditable="true"]:focus {
-      outline: 2px solid #27ae60 !important;
-      background-color: #fffde7 !important;
-    }
-    
-    @media print {
-      .print-actions, .edit-hint { display: none !important; }
-      body { background: none; }
-      .page-container { box-shadow: none; width: 100%; padding: 0; margin: 0; min-height: auto; outline: none !important; background: none !important; }
-      [contenteditable="true"] { outline: none !important; background: none !important; }
-    }
   </style>
 </head>
 <body>
 
-  <div class="print-actions">
-    <button onclick="window.print();" class="btn-print">🖨️ Cetak / Simpan PDF</button>
-    <button type="button" onclick="tambahBaris()" class="btn-add-row">➕ Tambah Baris Tabel</button>
-    <button type="button" onclick="hapusBaris()" class="btn-del-row">🗑️ Hapus Baris</button>
-    <button type="button" onclick="tambahTeks()" class="btn-add-text">📝 Tambah Paragraf</button>
-    <button type="button" onclick="toggleEditMode()" id="btnToggleEdit" class="btn-edit">✏️ Mode Edit: AKTIF</button>
-    <button type="button" onclick="location.reload()" class="btn-reset">↺ Reset Teks</button>
-    <a href="<?php echo site_url('root/rekap'); ?>" class="btn-back">← Kembali ke Rekap</a>
-    <div class="edit-hint">💡 <strong>Mode Edit Aktif:</strong> Anda dapat mengeklik &amp; mengedit SEMUA teks (Kop, Judul, Sel Tabel, Tanda Tangan, Nama, NIM) serta menambah/menghapus baris secara bebas!</div>
-  </div>
-
-  <div class="page-container" id="printableArea" contenteditable="true">
+  <div class="page-container">
     <!-- Kop Surat: Logo BEM di KIRI, Logo Kampus INAR di KANAN -->
-    <div class="kop-surat">
-      <img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" class="kop-logo kop-logo-bem">
-      <div class="kop-text">
+    <table class="kop-surat"><tr>
+      <td style="width: 14%; text-align: left;"><img src="<?php echo $logo_bem; ?>" alt="Logo BEM" class="kop-logo kop-logo-bem"></td>
+      <td class="kop-text" style="width: 64%;">
         <h3>BADAN EKSEKUTIF MAHASISWA</h3>
         <h2>INSTITUT ILMU KESEHATAN DAN TEKNOLOGI NURDIN ABDURRAHMAN</h2>
         <p>Sekretariat: Gedung Student Center Lt. 2, Sigli, Kab. Pidie, Aceh</p>
         <p>Email: bem@inar.ac.id | Website: www.bem-inar.ac.id</p>
-      </div>
-      <img src="<?php echo base_url('assets/images/logo-inar.png'); ?>" alt="Logo Kampus INAR" class="kop-logo kop-logo-kampus">
-    </div>
+      </td>
+      <td style="width: 22%; text-align: right;"><img src="<?php echo $logo_inar; ?>" alt="Logo Kampus INAR" class="kop-logo kop-logo-kampus"></td>
+    </tr></table>
 
     <div class="doc-title">
       <h4>LAPORAN REKAPITULASI KESELURUHAN DATA KEGIATAN BEM</h4>
@@ -108,11 +68,11 @@
       </p>
     </div>
 
-    <div class="summary-bar">
-      <div><strong>Total Kegiatan:</strong> <?php echo count($rekap); ?> Program</div>
-      <div><strong>Total Panitia Terlibat:</strong> <?php echo $total_panitia; ?> Orang</div>
-      <div><strong>Total Akumulasi Biaya/Anggaran:</strong> Rp <?php echo number_format($total_biaya, 0, ',', '.'); ?></div>
-    </div>
+    <table class="summary-bar"><tr>
+      <td><strong>Total Kegiatan:</strong> <?php echo count($rekap); ?> Program</td>
+      <td class="text-center"><strong>Total Panitia:</strong> <?php echo $total_panitia; ?> Orang</td>
+      <td class="text-right"><strong>Total Biaya:</strong> Rp <?php echo number_format($total_biaya, 0, ',', '.'); ?></td>
+    </tr></table>
 
     <table class="data-table">
       <thead>
@@ -154,98 +114,26 @@
       </tfoot>
     </table>
 
-    <div class="signature-block">
-      <div class="sig-column">
-        <p>Mengetahui,<br><strong>Presiden / Ketua BEM</strong></p>
+    <table class="signature-block"><tr>
+      <td class="sig-column">
+        <p class="sig-title">Mengetahui,<br><strong>Presiden / Ketua BEM</strong></p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 9pt; margin:0;">NIM. ........................................</p>
-      </div>
-      <div class="sig-column">
-        <p>Sigli, <?php echo date('d F Y'); ?><br><strong>Sekretaris Jenderal</strong></p>
+      </td>
+      <td class="sig-column">
+        <p class="sig-title">Sigli, <?php echo date('d F Y'); ?><br><strong>Sekretaris Jenderal</strong></p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 9pt; margin:0;">NIM. ........................................</p>
-      </div>
-      <div class="sig-column">
-        <p>Sigli, <?php echo date('d F Y'); ?><br><strong>Bendahara Umum</strong></p>
+      </td>
+      <td class="sig-column">
+        <p class="sig-title">Sigli, <?php echo date('d F Y'); ?><br><strong>Bendahara Umum</strong></p>
         <div class="sig-space"></div>
         <p class="sig-name">( ........................................ )</p>
         <p style="font-size: 9pt; margin:0;">NIM. ........................................</p>
-      </div>
-    </div>
+      </td>
+    </tr></table>
   </div>
-
-  <script>
-    function makeEverythingEditable() {
-      const area = document.getElementById('printableArea');
-      if (!area) return;
-      area.setAttribute('contenteditable', 'true');
-      const nodes = area.querySelectorAll('p, h1, h2, h3, h4, h5, td, th, span, div, strong');
-      nodes.forEach(el => el.setAttribute('contenteditable', 'true'));
-    }
-
-    let isEditMode = true;
-    function toggleEditMode() {
-      const area = document.getElementById('printableArea');
-      const btn = document.getElementById('btnToggleEdit');
-      isEditMode = !isEditMode;
-      const nodes = area.querySelectorAll('[contenteditable]');
-      nodes.forEach(el => el.setAttribute('contenteditable', isEditMode ? 'true' : 'false'));
-      area.setAttribute('contenteditable', isEditMode ? 'true' : 'false');
-      
-      if (isEditMode) {
-        btn.innerHTML = '✏️ Mode Edit: AKTIF';
-        btn.style.background = '#f39c12';
-      } else {
-        btn.innerHTML = '🔒 Mode Edit: NONAKTIF';
-        btn.style.background = '#95a5a6';
-      }
-    }
-
-    function tambahBaris() {
-      const tbody = document.querySelector('#printableArea table.data-table tbody');
-      if (!tbody) return;
-      const colCount = document.querySelectorAll('#printableArea table.data-table th').length || 7;
-      const rowCount = tbody.querySelectorAll('tr').length + 1;
-      const tr = document.createElement('tr');
-      
-      let cellsHTML = `<td class="text-center" contenteditable="true">${rowCount}</td>`;
-      for (let i = 1; i < colCount; i++) {
-        cellsHTML += `<td contenteditable="true">Data Baru ${i}</td>`;
-      }
-      tr.innerHTML = cellsHTML;
-      tbody.appendChild(tr);
-      makeEverythingEditable();
-    }
-
-    function hapusBaris() {
-      const tbody = document.querySelector('#printableArea table.data-table tbody');
-      if (!tbody) return;
-      const rows = tbody.querySelectorAll('tr');
-      if (rows.length > 0) {
-        rows[rows.length - 1].remove();
-      }
-    }
-
-    function tambahTeks() {
-      const area = document.getElementById('printableArea');
-      if (!area) return;
-      const p = document.createElement('p');
-      p.setAttribute('contenteditable', 'true');
-      p.style.marginTop = '15px';
-      p.style.fontSize = '10.5pt';
-      p.innerText = 'Tulis catatan atau keterangan tambahan di sini...';
-      const sigBlock = area.querySelector('.signature-block');
-      if (sigBlock) {
-        area.insertBefore(p, sigBlock);
-      } else {
-        area.appendChild(p);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', makeEverythingEditable);
-    makeEverythingEditable();
-  </script>
 </body>
 </html>
