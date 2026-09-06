@@ -78,8 +78,110 @@ class CetakController extends CI_Controller {
         $data['kepanitiaan'] = $this->Kepanitiaan->ambilKepanitiaanBerdasarkanKegiatan($idKegiatan);
         $data['keuangan'] = $this->Keuangan->ambilKeuanganBerdasarkanKegiatan($idKegiatan);
         $data['title'] = 'Laporan Pertanggungjawaban (LPJ) - ' . $kegiatan[0]->nama_kegiatan;
+        $data['logo_bem'] = $this->imageDataUri(FCPATH . 'assets/images/logo-bem.png');
+        $data['logo_inar'] = $this->imageDataUri(FCPATH . 'assets/images/logo-inar.png');
 
-        $this->load->view('cetak/CetakKegiatanDetailView', $data);
+        $html = $this->load->view('cetak/CetakKegiatanDetailView', $data, TRUE);
+
+        require_once APPPATH . 'third_party/dompdf/dompdf/autoload.inc.php';
+
+        $options = new Dompdf\Options();
+        $options->set('isRemoteEnabled', FALSE);
+        $options->set('isHtml5ParserEnabled', TRUE);
+        $options->set('defaultFont', 'Times-Roman');
+        $options->setChroot(FCPATH);
+
+        $filename = 'LPJ-' . $this->safeFilename($kegiatan[0]->nama_kegiatan) . '.pdf';
+        if (class_exists('DOMImplementation')) {
+            $pdf = new Dompdf\Dompdf($options);
+            $pdf->loadHtml($html, 'UTF-8');
+            $pdf->setPaper('A4', 'portrait');
+            $pdf->render();
+            $pdf->stream($filename, array('Attachment' => FALSE));
+            return;
+        }
+
+        $this->streamPdfWithChrome($html, $filename);
+    }
+
+    private function imageDataUri($path) {
+        if (!is_file($path) || !is_readable($path)) {
+            return '';
+        }
+
+        $mime = function_exists('mime_content_type') ? mime_content_type($path) : 'image/png';
+        return 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($path));
+    }
+
+    private function safeFilename($name) {
+        $name = preg_replace('/[^A-Za-z0-9_-]+/', '-', strip_tags($name));
+        $name = trim($name, '-');
+        return $name !== '' ? $name : 'Kegiatan';
+    }
+
+    private function streamPdfWithChrome($html, $filename) {
+        $chrome = is_executable('/usr/bin/google-chrome') ? '/usr/bin/google-chrome' : '';
+        if ($chrome === '') {
+            show_error('Generator PDF membutuhkan ekstensi PHP DOM/XML atau Google Chrome.', 500);
+        }
+
+        $htmlFile = tempnam(sys_get_temp_dir(), 'lpj-html-');
+        $pdfFile = tempnam(sys_get_temp_dir(), 'lpj-pdf-');
+        $profileDir = tempnam(sys_get_temp_dir(), 'lpj-chrome-');
+        if ($profileDir !== FALSE) {
+            @unlink($profileDir);
+            @mkdir($profileDir, 0700);
+        }
+        if ($htmlFile === FALSE || $pdfFile === FALSE || !is_dir($profileDir)) {
+            show_error('Gagal menyiapkan file sementara untuk PDF.', 500);
+        }
+
+        file_put_contents($htmlFile, $html);
+        $command = escapeshellarg($chrome)
+            . ' --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage'
+            . ' --user-data-dir=' . escapeshellarg($profileDir)
+            . ' --allow-file-access-from-files --print-to-pdf-no-header'
+            . ' --print-to-pdf=' . escapeshellarg($pdfFile)
+            . ' ' . escapeshellarg('file://' . $htmlFile) . ' 2>&1';
+
+        exec($command, $output, $status);
+        if ($status !== 0 || !is_file($pdfFile) || filesize($pdfFile) === 0) {
+            @unlink($htmlFile);
+            @unlink($pdfFile);
+            $this->removeDirectory($profileDir);
+            log_message('error', 'Chrome PDF gagal: ' . implode("\n", $output));
+            show_error('Gagal membuat dokumen PDF.', 500);
+        }
+
+        $pdfData = file_get_contents($pdfFile);
+        @unlink($htmlFile);
+        @unlink($pdfFile);
+        $this->removeDirectory($profileDir);
+
+        $this->output
+            ->set_content_type('application/pdf')
+            ->set_header('Content-Disposition: inline; filename="' . $filename . '"')
+            ->set_header('Content-Length: ' . strlen($pdfData))
+            ->set_output($pdfData);
+    }
+
+    private function removeDirectory($directory) {
+        if (!is_dir($directory)) {
+            return;
+        }
+
+        $items = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach ($items as $item) {
+            if ($item->isDir()) {
+                @rmdir($item->getPathname());
+            } else {
+                @unlink($item->getPathname());
+            }
+        }
+        @rmdir($directory);
     }
 
     public function cetakKeuangan() {
