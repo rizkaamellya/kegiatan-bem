@@ -12,9 +12,9 @@
     /* Kop Surat */
     .kop-surat { width: 100%; border-bottom: 3px double #000; padding-bottom: 12px; margin-bottom: 20px; border-collapse: collapse; }
     .kop-surat td { vertical-align: middle; }
-    .kop-logo { object-fit: contain; }
-    .kop-logo-bem { width: 85px; height: 85px; }
-    .kop-logo-kampus { width: 85px; height: 85px; }
+    .kop-logo { display: inline-block; }
+    .kop-logo-bem { width: 80px; height: 80px; }
+    .kop-logo-kampus { width: 136px; height: 80px; }
     .kop-text { text-align: center; padding: 0 15px; }
     .kop-text h3 { margin: 0; font-size: 11pt; text-transform: uppercase; font-weight: normal; }
     .kop-text h2 { margin: 2px 0; font-size: 13pt; text-transform: uppercase; font-weight: bold; color: #064f3a; }
@@ -53,14 +53,14 @@
   <div class="page-container">
     <!-- Kop Surat: Logo BEM di KIRI, Logo Kampus INAR di KANAN -->
     <table class="kop-surat"><tr>
-      <td style="width: 16%; text-align: left;"><img src="<?php echo $logo_bem; ?>" alt="Logo BEM" class="kop-logo kop-logo-bem"></td>
-      <td class="kop-text" style="width: 68%;">
+      <td style="width: 14%; text-align: left;"><img src="<?php echo $logo_bem; ?>" alt="Logo BEM" class="kop-logo kop-logo-bem"></td>
+      <td class="kop-text" style="width: 64%;">
         <h3>BADAN EKSEKUTIF MAHASISWA</h3>
         <h2>INSTITUT ILMU KESEHATAN DAN TEKNOLOGI NURDIN ABDURRAHMAN</h2>
         <p>Sekretariat: Gedung Student Center Lt. 2, Sigli, Kab. Pidie, Aceh</p>
         <p>Email: bem@inar.ac.id | Website: www.bem-inar.ac.id</p>
       </td>
-      <td style="width: 16%; text-align: right;"><img src="<?php echo $logo_inar; ?>" alt="Logo Kampus INAR" class="kop-logo kop-logo-kampus"></td>
+      <td style="width: 22%; text-align: right;"><img src="<?php echo $logo_inar; ?>" alt="Logo Kampus INAR" class="kop-logo kop-logo-kampus"></td>
     </tr></table>
 
     <div class="doc-title">
