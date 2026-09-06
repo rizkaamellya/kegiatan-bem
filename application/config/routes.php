@@ -82,6 +82,17 @@ $route['root/admin/edit/(:num)']['GET'] = 'AdminController/editAdmin/$1';
 $route['root/admin/update']['POST'] = 'AdminController/updateAdmin';
 $route['root/admin/delete/(:num)']['GET'] = 'AdminController/hapusAdmin/$1';
 
+$route['root/rekap']['GET'] = 'RekapController/index';
+$route['root/rekap/detail/(:num)']['GET'] = 'RekapController/detail/$1';
+
+$route['root/cetak']['GET'] = 'CetakController/index';
+$route['root/cetak/rekap']['GET'] = 'CetakController/cetakRekapKeseluruhan';
+$route['root/cetak/kegiatan']['GET'] = 'CetakController/cetakKegiatan';
+$route['root/cetak/kegiatan-detail/(:num)']['GET'] = 'CetakController/cetakKegiatanDetail/$1';
+$route['root/cetak/keuangan']['GET'] = 'CetakController/cetakKeuangan';
+$route['root/cetak/kepanitiaan']['GET'] = 'CetakController/cetakKepanitiaan';
+$route['kegiatan/cetak/(:num)']['GET'] = 'CetakController/cetakKegiatanDetailPublik/$1';
+
 $route['login']['GET'] = 'AuthController/login';
 $route['login']['POST'] = 'AuthController/authenticate';
 $route['logout']['GET'] = 'AuthController/logout';

@@ -7,7 +7,12 @@ class Keuangan extends CI_Model {
     }
 
     public function ambilKeuangan() {
-        return $this->db->get('keuangan')->result();
+        $this->db->select('keuangan.*, kegiatan.nama_kegiatan');
+        $this->db->from('keuangan');
+        $this->db->join('kegiatan', 'kegiatan.id_kegiatan = keuangan.id_kegiatan', 'left');
+        $this->db->order_by('keuangan.tanggal', 'DESC');
+        $this->db->order_by('keuangan.id_keuangan', 'DESC');
+        return $this->db->get()->result();
     }
 
     public function ambilKeuanganBerdasarkanId($idKeuangan) {

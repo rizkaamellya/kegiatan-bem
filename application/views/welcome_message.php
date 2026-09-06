@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portal kegiatan Badan Eksekutif Mahasiswa">
-  <title>BEM Kampus — Bergerak, Berdampak, Bersama</title>
+  <title>BEM INAR Sigli — Institut Ilmu Kesehatan dan Teknologi Nurdin Abdurrahman</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -27,9 +27,12 @@
 </head>
 <body>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="#beranda"><span class="brand-mark">BEM</span><span><b>BEM KAMPUS</b><small>Badan Eksekutif Mahasiswa<br>Bergerak dan Berdampak</small></span></a>
+  <a class="brand" href="#beranda"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="width:48px; height:48px; object-fit:contain; border-radius:50%; background:#fff; padding:2px;"><span><b>BEM INAR</b><small>Institut Ilmu Kesehatan &amp; Teknologi<br>Nurdin Abdurrahman - Sigli</small></span></a>
   <button class="menu" aria-label="Buka menu" aria-expanded="false">☰</button>
-  <nav class="nav-links"><a class="active" href="#beranda">BERANDA</a><a href="#tentang">TENTANG KAMI</a><a href="<?php echo site_url('kegiatan'); ?>">KEGIATAN</a><a class="login" href="<?php echo site_url('login'); ?>">♟ &nbsp; LOGIN ADMIN</a></nav>
+  <nav class="nav-links">
+    <a class="active" href="#beranda">BERANDA</a>
+
+    <a href="#tentang">TENTANG KAMI</a><a href="<?php echo site_url('kegiatan'); ?>">KEGIATAN</a><a class="login" href="<?php echo site_url('login'); ?>">♟ &nbsp; LOGIN ADMIN</a></nav>
 </div></header>
 <main>
   <section class="hero" id="beranda"><div class="wrap"><div class="hero-copy"><span class="eyebrow">Selamat datang</span><h1>Wadah Aspirasi,<br>Ruang Aksi.</h1><p>Bersama membangun organisasi mahasiswa yang progresif, kolaboratif, dan memberi dampak nyata bagi kampus serta masyarakat.</p><a class="btn" href="<?php echo site_url('kegiatan'); ?>">LIHAT KEGIATAN <span>→</span></a></div></div></section>
@@ -47,7 +50,7 @@
 <dialog class="info-modal" id="modal-visi"><div class="modal-body"><button class="modal-close" type="button" aria-label="Tutup">×</button><h2>Visi BEM</h2><p>Menjadi organisasi mahasiswa yang progresif, inovatif, dan berintegritas dalam mewujudkan mahasiswa unggul, berkarakter, serta mampu memberi dampak positif bagi lingkungan kampus dan masyarakat.</p></div></dialog>
 <dialog class="info-modal" id="modal-misi"><div class="modal-body"><button class="modal-close" type="button" aria-label="Tutup">×</button><h2>Misi BEM</h2><ul><li>Meningkatkan kualitas sumber daya mahasiswa melalui program edukatif dan kreatif.</li><li>Membangun budaya organisasi yang kolaboratif, transparan, dan bertanggung jawab.</li><li>Menjadi ruang aspirasi serta penghubung antara mahasiswa dan institusi.</li><li>Mendorong kegiatan sosial yang bermanfaat bagi kampus dan masyarakat.</li></ul></div></dialog>
 <dialog class="info-modal" id="modal-tujuan"><div class="modal-body"><button class="modal-close" type="button" aria-label="Tutup">×</button><h2>Tujuan BEM</h2><p>Mewujudkan kegiatan yang bermanfaat bagi mahasiswa dan masyarakat, mengembangkan potensi mahasiswa, memperkuat solidaritas, serta membangun sinergi yang baik di seluruh lingkungan kampus.</p></div></dialog>
-<footer id="kontak"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><div class="brand"><span class="brand-mark">BEM</span><span><b>BEM KAMPUS</b><small>Badan Eksekutif Mahasiswa</small></span></div><p>Ruang tumbuh, berkolaborasi, serta menyampaikan aspirasi untuk seluruh mahasiswa.</p></div><div><h4>Tautan Cepat</h4><div class="footer-links"><a href="#beranda">Beranda</a><a href="#dokumentasi">Dokumentasi</a><a href="#tentang">Tentang Kami</a><a href="<?php echo site_url('kegiatan'); ?>">Kegiatan</a><a href="#kontak">Kontak</a><a href="<?php echo site_url('login'); ?>">Admin</a></div></div><div class="contact"><h4>Kontak Kami</h4><p>⌖ &nbsp; Sekretariat BEM, Area Kampus</p><p>✉ &nbsp; bem@kampus.ac.id</p><p>◎ &nbsp; @bem_kampus</p></div></div><div class="copyright">© <?php echo date('Y'); ?> BEM Kampus. All Rights Reserved.</div></div></footer>
+<footer id="kontak"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><div class="brand"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="width:45px; height:45px; object-fit:contain; border-radius:50%; background:#fff; padding:2px;"><span><b>BEM INAR</b><small>Institut Ilmu Kesehatan &amp; Teknologi Nurdin Abdurrahman</small></span></div><p>Ruang tumbuh, berkolaborasi, serta menyampaikan aspirasi untuk seluruh mahasiswa.</p></div><div><h4>Tautan Cepat</h4><div class="footer-links"><a href="#beranda">Beranda</a><a href="#dokumentasi">Dokumentasi</a><a href="#tentang">Tentang Kami</a><a href="<?php echo site_url('kegiatan'); ?>">Kegiatan</a><a href="#kontak">Kontak</a><a href="<?php echo site_url('login'); ?>">Admin</a></div></div><div class="contact"><h4>Kontak Kami</h4><p>⌖ &nbsp; Sekretariat BEM, Sigli, Aceh</p><p>✉ &nbsp; bem@inar.ac.id</p><p>◎ &nbsp; @bem_inar</p></div></div><div class="copyright">© <?php echo date('Y'); ?> BEM INAR Sigli. All Rights Reserved.</div></div></footer>
 <script>const b=document.querySelector('.menu'),n=document.querySelector('.nav-links');b.addEventListener('click',()=>{n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'))});document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>n.classList.remove('open')));document.querySelectorAll('[data-modal]').forEach(button=>button.addEventListener('click',()=>document.getElementById(button.dataset.modal).showModal()));document.querySelectorAll('.info-modal').forEach(modal=>{modal.querySelector('.modal-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',event=>{if(event.target===modal)modal.close()})});</script>
 </body>
 </html>

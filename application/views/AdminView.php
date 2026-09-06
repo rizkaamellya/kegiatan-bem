@@ -6,12 +6,14 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="height:32px; width:32px; object-fit:contain; border-radius:50%; background:#fff; padding:1px;"> Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">Kepanitiaan</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/rekap">📊 Rekap Data</a></li>
+            <li class="nav-item"><a class="nav-link text-warning fw-bold" href="<?php echo base_url(); ?>index.php/root/cetak">🖨️ Cetak Laporan</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/root/admin">Admin</a></li>
           </ul>
           <span class="navbar-text me-3"><?php echo html_escape($this->session->userdata('admin_username')); ?></span>

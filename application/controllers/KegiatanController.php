@@ -8,17 +8,18 @@ class KegiatanController extends MY_Controller {
     }
      
     public function index() {
-        // $session = $this->session->userdata('isLogin');
+        $periode_tahun = $this->input->get('periode_tahun');
+        $semester = $this->input->get('semester');
 
-        // if ($session == false) {
-        //     redirect('login');
-        // } else {
-            $data['kegiatan'] = $this->Kegiatan->ambilKegiatan();
-            $this->load->view('KegiatanView', $data);
-        // }
+        $data['kegiatan'] = $this->Kegiatan->ambilKegiatan($periode_tahun, $semester);
+        $data['daftar_periode'] = $this->Kegiatan->ambilDaftarPeriodeTahun();
+        $data['selected_periode'] = $periode_tahun;
+        $data['selected_semester'] = $semester;
+        $this->load->view('KegiatanView', $data);
     }
     public function newKegiatan() {
         $data['kegiatan'] = null;
+        $data['daftar_periode'] = $this->Kegiatan->ambilDaftarPeriodeTahun();
         $this->load->view('KegiatanNewView', $data);
     }
 
@@ -71,9 +72,26 @@ class KegiatanController extends MY_Controller {
     }
 
     public function tambahKegiatan() {
+        $tanggal = $this->input->post('tanggal');
+        $periode_tahun = $this->input->post('periode_tahun');
+        $semester = $this->input->post('semester');
+
+        // Jika periode kosong, buat otomatis dari tanggal
+        if (empty($periode_tahun) && !empty($tanggal)) {
+            $thn = (int)date('Y', strtotime($tanggal));
+            $bln = (int)date('n', strtotime($tanggal));
+            $periode_tahun = ($bln >= 7) ? ($thn . '/' . ($thn + 1)) : (($thn - 1) . '/' . $thn);
+        }
+        if (empty($semester) && !empty($tanggal)) {
+            $bln = (int)date('n', strtotime($tanggal));
+            $semester = ($bln >= 7 && $bln <= 12) ? 'Ganjil' : 'Genap';
+        }
+
         $val = array(
             'nama_kegiatan' => $this->input->post('nama_kegiatan'),
-            'tanggal' => $this->input->post('tanggal'),
+            'tanggal' => $tanggal,
+            'periode_tahun' => $periode_tahun,
+            'semester' => $semester,
             'lokasi' => $this->input->post('lokasi'),
             'deskripsi' => $this->input->post('deskripsi')
         );
@@ -91,14 +109,31 @@ class KegiatanController extends MY_Controller {
 
     public function editKegiatan($idKegiatan) {
         $data['kegiatan'] = $this->Kegiatan->ambilKegiatanBerdasarkanId($idKegiatan);
+        $data['daftar_periode'] = $this->Kegiatan->ambilDaftarPeriodeTahun();
         $this->load->view('KegiatanEditView', $data);
     }
 
     public function updateKegiatan() {
         $idKegiatan = $this->input->post('id_kegiatan');
+        $tanggal = $this->input->post('tanggal');
+        $periode_tahun = $this->input->post('periode_tahun');
+        $semester = $this->input->post('semester');
+
+        if (empty($periode_tahun) && !empty($tanggal)) {
+            $thn = (int)date('Y', strtotime($tanggal));
+            $bln = (int)date('n', strtotime($tanggal));
+            $periode_tahun = ($bln >= 7) ? ($thn . '/' . ($thn + 1)) : (($thn - 1) . '/' . $thn);
+        }
+        if (empty($semester) && !empty($tanggal)) {
+            $bln = (int)date('n', strtotime($tanggal));
+            $semester = ($bln >= 7 && $bln <= 12) ? 'Ganjil' : 'Genap';
+        }
+
         $val = array(
             'nama_kegiatan' => $this->input->post('nama_kegiatan'),
-            'tanggal' => $this->input->post('tanggal'),
+            'tanggal' => $tanggal,
+            'periode_tahun' => $periode_tahun,
+            'semester' => $semester,
             'lokasi' => $this->input->post('lokasi'),
             'deskripsi' => $this->input->post('deskripsi')
         );

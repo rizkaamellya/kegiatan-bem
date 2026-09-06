@@ -7,7 +7,11 @@ class Kepanitiaan extends CI_Model {
     }
 
     public function ambilKepanitiaan() {
-        return $this->db->get('kepanitiaan')->result();
+        $this->db->select('kepanitiaan.*, kegiatan.nama_kegiatan');
+        $this->db->from('kepanitiaan');
+        $this->db->join('kegiatan', 'kegiatan.id_kegiatan = kepanitiaan.id_kegiatan', 'left');
+        $this->db->order_by('kepanitiaan.id_kepanitiaan', 'DESC');
+        return $this->db->get()->result();
     }
 
     public function ambilKepanitiaanBerdasarkanId($idKepanitiaan) {

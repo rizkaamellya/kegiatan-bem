@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login Admin - BEM Kampus</title>
+  <title>Login Admin - BEM INAR Sigli</title>
   <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
   <style>
     body{min-height:100vh;background:linear-gradient(135deg,#02382d,#08734d);display:flex;align-items:center;padding:24px}.login-card{width:100%;max-width:430px;margin:auto;border:0;border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.28)}.brand-mark{width:58px;height:58px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:#064f3a;color:#c8e879;font-weight:800;border:2px solid #a6ce39}.btn-login{background:#08734d;border-color:#08734d}.btn-login:hover{background:#064f3a;border-color:#064f3a}
@@ -13,7 +13,7 @@
 <body>
   <main class="card login-card">
     <div class="card-body p-4 p-md-5">
-      <div class="brand-mark">BEM</div>
+      <img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" class="d-block mx-auto mb-3" style="width:75px; height:75px; object-fit:contain; border-radius:50%; background:#fff; padding:3px; border:2px solid #a6ce39;">
       <h1 class="h3 text-center mb-2">Login Admin</h1>
       <p class="text-secondary text-center mb-4">Masuk untuk mengelola kegiatan BEM.</p>
 

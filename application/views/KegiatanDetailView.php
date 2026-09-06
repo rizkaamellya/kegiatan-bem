@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php echo html_escape($kegiatan->nama_kegiatan); ?> — BEM Kampus</title>
+  <title><?php echo html_escape($kegiatan->nama_kegiatan); ?> — BEM INAR Sigli</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -16,14 +16,14 @@
   </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="<?php echo base_url(); ?>"><span class="mark">BEM</span><b>BEM KAMPUS</b></a><a class="back" href="<?php echo site_url('kegiatan'); ?>">← KEMBALI</a></div></header>
+<header><div class="wrap nav"><a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="width:40px; height:40px; object-fit:contain; border-radius:50%; background:#fff; padding:2px; margin-right:8px;"><b>BEM INAR</b></a><div style="display:flex;gap:10px;"><a class="back" href="<?php echo site_url('kegiatan/cetak/' . $kegiatan->id_kegiatan); ?>" target="_blank" style="background:#a6ce39;color:#17372d;border:none;">🖨️ CETAK LPJ</a><a class="back" href="<?php echo site_url('kegiatan'); ?>">← KEMBALI</a></div></div></header>
 <main><div class="wrap"><article class="article">
   <?php if (!empty($kegiatan->foto)) { ?><img class="hero" src="<?php echo base_url('uploads/kegiatan/' . rawurlencode($kegiatan->foto)); ?>" alt="<?php echo html_escape($kegiatan->nama_kegiatan); ?>"><?php } else { ?><img class="hero" src="<?php echo base_url('assets/images/hero-bem.png'); ?>" alt="<?php echo html_escape($kegiatan->nama_kegiatan); ?>"><?php } ?>
-  <div class="content"><span class="eyebrow">KEGIATAN BEM</span><h1><?php echo html_escape($kegiatan->nama_kegiatan); ?></h1><div class="meta"><span><?php echo date('d-m-Y', strtotime($kegiatan->tanggal)); ?></span><?php if (!empty($kegiatan->lokasi)) { ?><span><?php echo html_escape($kegiatan->lokasi); ?></span><?php } ?></div><div class="description"><?php echo !empty($kegiatan->deskripsi) ? $kegiatan->deskripsi : '<p>Belum ada deskripsi untuk kegiatan ini.</p>'; ?></div>
+  <div class="content"><span class="eyebrow">KEGIATAN BEM</span><h1><?php echo html_escape($kegiatan->nama_kegiatan); ?></h1><div class="meta"><span><?php echo date('d-m-Y', strtotime($kegiatan->tanggal)); ?></span><?php if (!empty($kegiatan->periode_tahun)) { ?><span>Tahun Akademik <?php echo html_escape($kegiatan->periode_tahun); ?> (Semester <?php echo html_escape($kegiatan->semester); ?>)</span><?php } ?><?php if (!empty($kegiatan->lokasi)) { ?><span><?php echo html_escape($kegiatan->lokasi); ?></span><?php } ?></div><div class="description"><?php echo !empty($kegiatan->deskripsi) ? $kegiatan->deskripsi : '<p>Belum ada deskripsi untuk kegiatan ini.</p>'; ?></div>
     <?php if (!empty($kepanitiaan)) { ?><section class="data-section"><h2>Susunan Panitia</h2><div class="table-wrap"><table class="data"><thead><tr><th>No.</th><th>Nama Panitia</th><th>Jabatan</th></tr></thead><tbody><?php foreach ($kepanitiaan as $index => $panitia) { ?><tr><td><?php echo $index + 1; ?></td><td><?php echo html_escape($panitia->nama_panitia); ?></td><td><?php echo html_escape($panitia->jabatan); ?></td></tr><?php } ?></tbody></table></div></section><?php } ?>
     <?php if (!empty($keuangan)) { $totalKeuangan = 0; ?><section class="data-section"><h2>Rincian Keuangan</h2><div class="table-wrap"><table class="data"><thead><tr><th>Tanggal</th><th>Keterangan</th><th class="number">Jumlah</th><th class="number">Harga</th><th class="number">Subtotal</th></tr></thead><tbody><?php foreach ($keuangan as $item) { $subtotal = (int) $item->jumlah * (float) $item->harga; $totalKeuangan += $subtotal; ?><tr><td><?php echo date('d-m-Y', strtotime($item->tanggal)); ?></td><td><?php echo html_escape($item->keterangan); ?></td><td class="number"><?php echo number_format($item->jumlah, 0, ',', '.'); ?></td><td class="number">Rp <?php echo number_format($item->harga, 0, ',', '.'); ?></td><td class="number">Rp <?php echo number_format($subtotal, 0, ',', '.'); ?></td></tr><?php } ?></tbody><tfoot><tr><td colspan="4">Total Keuangan</td><td class="number">Rp <?php echo number_format($totalKeuangan, 0, ',', '.'); ?></td></tr></tfoot></table></div></section><?php } ?>
   </div>
 </article></div></main>
-<footer><div class="wrap">© <?php echo date('Y'); ?> BEM Kampus. All Rights Reserved.</div></footer>
+<footer><div class="wrap">© <?php echo date('Y'); ?> BEM INAR Sigli. All Rights Reserved.</div></footer>
 </body>
 </html>

@@ -91,52 +91,84 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="height:32px; width:32px; object-fit:contain; border-radius:50%; background:#fff; padding:1px;"> Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">kepanitian</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">Kepanitiaan</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/rekap">📊 Rekap Data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning fw-bold" href="<?php echo base_url(); ?>index.php/root/cetak">🖨️ Cetak Laporan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/admin">Admin</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <main class="container">
+      <h3 class="mb-4 text-center">Tambah Kegiatan Baru</h3>
       <form method="post" action="<?php echo base_url(); ?>index.php/root/kegiatan" enctype="multipart/form-data">
         <div class="mb-3">
-            <label class="form-label">Nama Kegiatan</label>
-            <input type="text" name="nama_kegiatan" class="form-control">
+            <label class="form-label fw-semibold">Nama Kegiatan</label>
+            <input type="text" name="nama_kegiatan" class="form-control" required placeholder="Contoh: SEMINAR KESEHATAN NASIONAL 2026">
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+              <label class="form-label fw-semibold">Tanggal Kegiatan</label>
+              <input type="date" name="tanggal" id="inputTanggal" class="form-control" required value="<?php echo date('Y-m-d'); ?>">
+          </div>
+          <div class="col-md-4 mb-3">
+              <label class="form-label fw-semibold">Periode Tahun / Tahun Akademik</label>
+              <input type="text" name="periode_tahun" id="inputPeriodeTahun" class="form-control" list="listPeriode" placeholder="Contoh: 2025/2026 atau 2026">
+              <datalist id="listPeriode">
+                <?php 
+                  $currY = (int)date('Y');
+                  $opts = array(($currY-1).'/'.$currY, $currY.'/'.($currY+1), ($currY+1).'/'.($currY+2), (string)$currY, (string)($currY+1));
+                  if (!empty($daftar_periode)) { $opts = array_unique(array_merge($opts, $daftar_periode)); }
+                  foreach ($opts as $opt): 
+                ?>
+                  <option value="<?php echo html_escape($opt); ?>">
+                <?php endforeach; ?>
+              </datalist>
+              <div class="form-text">Bisa pilih dari daftar atau ketik sendiri (cth: 2025/2026).</div>
+          </div>
+          <div class="col-md-4 mb-3">
+              <label class="form-label fw-semibold">Semester</label>
+              <select name="semester" id="inputSemester" class="form-select">
+                <option value="Ganjil">Semester Ganjil</option>
+                <option value="Genap">Semester Genap</option>
+              </select>
+          </div>
         </div>
         <div class="mb-3">
-            <label class="form-label">Tanggal</label>
-            <input type="date" name="tanggal" class="form-control" required>
+            <label class="form-label fw-semibold">Lokasi</label>
+            <input type="text" name="lokasi" class="form-control" placeholder="Contoh: Aula Utama Kampus INAR Sigli">
         </div>
         <div class="mb-3">
-            <label class="form-label">Lokasi</label>
-            <input type="text" name="lokasi" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="foto">Foto Thumbnail</label>
+            <label class="form-label fw-semibold" for="foto">Foto Thumbnail</label>
             <input type="file" name="foto" id="foto" class="form-control" accept="image/jpeg,image/png">
             <div class="form-text">Format JPG atau PNG. Ukuran maksimal 2 MB.</div>
         </div>
         <div class="mb-3">
-            <label class="form-label">Deskripsi</label>
+            <label class="form-label fw-semibold">Deskripsi</label>
             <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary px-4">Simpan Kegiatan</button>
+        <a href="<?php echo base_url(); ?>index.php/root/kegiatan" class="btn btn-secondary ms-2">Batal</a>
     </form>
     </main>
     <script src="

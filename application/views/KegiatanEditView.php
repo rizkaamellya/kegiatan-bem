@@ -7,12 +7,15 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="height:32px; width:32px; object-fit:contain; border-radius:50%; background:#fff; padding:1px;"> Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a></li>
+            <li class="nav-item"><a class="nav-link active" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">Kepanitiaan</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/rekap">📊 Rekap Data</a></li>
+            <li class="nav-item"><a class="nav-link text-warning fw-bold" href="<?php echo base_url(); ?>index.php/root/cetak">🖨️ Cetak Laporan</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>index.php/root/admin">Admin</a></li>
           </ul>
         </div>
       </div>
@@ -24,15 +27,38 @@
       <form method="post" action="<?php echo base_url(); ?>index.php/root/kegiatan/update" enctype="multipart/form-data">
         <input type="hidden" name="id_kegiatan" value="<?php echo $k->id_kegiatan; ?>">
         <div class="mb-3">
-          <label class="form-label">Nama Kegiatan</label>
-          <input type="text" name="nama_kegiatan" class="form-control" value="<?php echo html_escape($k->nama_kegiatan); ?>">
+          <label class="form-label fw-semibold">Nama Kegiatan</label>
+          <input type="text" name="nama_kegiatan" class="form-control" value="<?php echo html_escape($k->nama_kegiatan); ?>" required>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Tanggal Kegiatan</label>
+            <input type="date" name="tanggal" class="form-control" value="<?php echo html_escape($k->tanggal); ?>" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Periode Tahun / Tahun Akademik</label>
+            <input type="text" name="periode_tahun" class="form-control" list="listPeriode" value="<?php echo html_escape($k->periode_tahun); ?>" placeholder="Contoh: 2025/2026 atau 2026">
+            <datalist id="listPeriode">
+              <?php 
+                $currY = (int)date('Y');
+                $opts = array(($currY-1).'/'.$currY, $currY.'/'.($currY+1), ($currY+1).'/'.($currY+2), (string)$currY, (string)($currY+1));
+                if (!empty($daftar_periode)) { $opts = array_unique(array_merge($opts, $daftar_periode)); }
+                foreach ($opts as $opt): 
+              ?>
+                <option value="<?php echo html_escape($opt); ?>">
+              <?php endforeach; ?>
+            </datalist>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label fw-semibold">Semester</label>
+            <select name="semester" class="form-select">
+              <option value="Ganjil" <?php echo ($k->semester == 'Ganjil') ? 'selected' : ''; ?>>Semester Ganjil</option>
+              <option value="Genap" <?php echo ($k->semester == 'Genap') ? 'selected' : ''; ?>>Semester Genap</option>
+            </select>
+          </div>
         </div>
         <div class="mb-3">
-          <label class="form-label">Tanggal</label>
-          <input type="date" name="tanggal" class="form-control" value="<?php echo html_escape($k->tanggal); ?>" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Lokasi</label>
+          <label class="form-label fw-semibold">Lokasi</label>
           <input type="text" name="lokasi" class="form-control" value="<?php echo html_escape($k->lokasi); ?>">
         </div>
         <div class="mb-3">

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kegiatan — BEM Kampus</title>
+  <title>Kegiatan — BEM INAR Sigli</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -19,17 +19,17 @@
   </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="<?php echo base_url(); ?>"><span class="mark">BEM</span><b>BEM KAMPUS</b></a><nav class="links"><a href="<?php echo base_url(); ?>">BERANDA</a><a class="active" href="<?php echo site_url('kegiatan'); ?>">KEGIATAN</a><a class="login" href="<?php echo site_url('login'); ?>">LOGIN ADMIN</a></nav></div></header>
+<header><div class="wrap nav"><a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="width:40px; height:40px; object-fit:contain; border-radius:50%; background:#fff; padding:2px; margin-right:8px;"><b>BEM INAR</b></a><nav class="links"><a href="<?php echo base_url(); ?>">BERANDA</a><a class="active" href="<?php echo site_url('kegiatan'); ?>">KEGIATAN</a><a class="login" href="<?php echo site_url('login'); ?>">LOGIN ADMIN</a></nav></div></header>
 <section class="heading"><div class="wrap"><small>KABAR &amp; AGENDA</small><h1>Kegiatan BEM</h1><p>Ikuti kabar terbaru, agenda, dan berbagai program BEM yang memberi dampak bagi mahasiswa dan masyarakat.</p></div></section>
 <main><div class="wrap"><div class="grid">
   <?php foreach ($kegiatan as $k) { $ringkasan = trim(strip_tags($k->deskripsi)); ?>
   <article class="card"><a href="<?php echo site_url('kegiatan/' . $k->id_kegiatan); ?>">
     <div class="photo"><?php if (!empty($k->foto)) { ?><img src="<?php echo base_url('uploads/kegiatan/' . rawurlencode($k->foto)); ?>" alt="<?php echo html_escape($k->nama_kegiatan); ?>"><?php } ?></div>
-    <div class="body"><h2><?php echo html_escape($k->nama_kegiatan); ?></h2><div class="meta"><span><?php echo date('d-m-Y', strtotime($k->tanggal)); ?></span><?php if (!empty($k->lokasi)) { ?><span><?php echo html_escape($k->lokasi); ?></span><?php } ?></div><p><?php echo html_escape($ringkasan ? substr($ringkasan, 0, 135) : 'Informasi selengkapnya mengenai kegiatan BEM.'); ?></p><span class="read">SELENGKAPNYA →</span></div>
+    <div class="body"><h2><?php echo html_escape($k->nama_kegiatan); ?></h2><div class="meta"><span><?php echo date('d-m-Y', strtotime($k->tanggal)); ?></span><?php if (!empty($k->periode_tahun)) { ?><span>Thn <?php echo html_escape($k->periode_tahun); ?> (<?php echo html_escape($k->semester); ?>)</span><?php } ?><?php if (!empty($k->lokasi)) { ?><span><?php echo html_escape($k->lokasi); ?></span><?php } ?></div><p><?php echo html_escape($ringkasan ? substr($ringkasan, 0, 135) : 'Informasi selengkapnya mengenai kegiatan BEM.'); ?></p><span class="read">SELENGKAPNYA →</span></div>
   </a></article>
   <?php } ?>
   <?php if (empty($kegiatan)) { ?><div class="empty">Belum ada kegiatan yang dipublikasikan.</div><?php } ?>
 </div></div></main>
-<footer><div class="wrap">© <?php echo date('Y'); ?> BEM Kampus. All Rights Reserved.</div></footer>
+<footer style="background:#02382d;color:#fff;padding:25px 0;text-align:center;"><div class="wrap">© <?php echo date('Y'); ?> BEM INAR Sigli. All Rights Reserved.</div></footer>
 </body>
 </html>

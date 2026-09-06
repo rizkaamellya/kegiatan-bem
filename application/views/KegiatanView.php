@@ -90,23 +90,29 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="height:32px; width:32px; object-fit:contain; border-radius:50%; background:#fff; padding:1px;"> Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">kepanitian</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">Kepanitiaan</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/rekap">📊 Rekap Data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning fw-bold" href="<?php echo base_url(); ?>index.php/root/cetak">🖨️ Cetak Laporan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/admin">Admin</a>
             </li>
           </ul>
           <span class="navbar-text me-3"><?php echo html_escape($this->session->userdata('admin_username')); ?></span>
@@ -114,48 +120,107 @@
         </div>
       </div>
     </nav>
-    <main class="container">
-      <div class="card">
-        <h5 class="card-header text-center">Data Kegiatan</h5>
+    <main class="container mb-5">
+      <!-- Filter Bar -->
+      <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-body p-3">
+          <form method="get" action="<?php echo base_url('index.php/root/kegiatan'); ?>" class="row g-2 align-items-center">
+            <div class="col-auto">
+              <span class="fw-bold text-muted small">FILTER:</span>
+            </div>
+            <div class="col-md-3">
+              <select name="periode_tahun" class="form-select form-select-sm">
+                <option value="">-- Semua Tahun Akademik --</option>
+                <?php if (!empty($daftar_periode)): ?>
+                  <?php foreach ($daftar_periode as $p): ?>
+                    <option value="<?php echo html_escape($p); ?>" <?php echo ($selected_periode == $p) ? 'selected' : ''; ?>>Tahun <?php echo html_escape($p); ?></option>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select name="semester" class="form-select form-select-sm">
+                <option value="">-- Semua Semester --</option>
+                <option value="Ganjil" <?php echo ($selected_semester == 'Ganjil') ? 'selected' : ''; ?>>Semester Ganjil</option>
+                <option value="Genap" <?php echo ($selected_semester == 'Genap') ? 'selected' : ''; ?>>Semester Genap</option>
+              </select>
+            </div>
+            <div class="col-auto d-flex gap-1">
+              <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+              <?php if (!empty($selected_periode) || !empty($selected_semester)): ?>
+                <a href="<?php echo base_url('index.php/root/kegiatan'); ?>" class="btn btn-outline-secondary btn-sm">Reset</a>
+              <?php endif; ?>
+            </div>
+            <div class="col-md text-md-end">
+              <a href="<?php echo site_url('root/rekap'); ?>" class="btn btn-success btn-sm">
+                📊 Buka Rekapan Lengkap
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <h5 class="card-header bg-white py-3 fw-bold">Data Kegiatan BEM</h5>
         <div class="card-body">
-           <a href="<?php echo base_url(); ?>index.php/root/kegiatan/new">
-           <button type="button" class="btn btn-primary">Tambah</button>
-          </a>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Thumbnail</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Lokasi</th>
-                <th scope="col">Deskripsi</th>
-                <th scope="col">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($kegiatan as $k) { ?>
-              <tr>
-                <td>
-                  <?php if (!empty($k->foto)) { ?>
-                    <img src="<?php echo base_url('uploads/kegiatan/' . rawurlencode($k->foto)); ?>" alt="Thumbnail <?php echo html_escape($k->nama_kegiatan); ?>" class="rounded" style="width: 120px; height: 72px; object-fit: cover;">
-                  <?php } else { ?>
-                    <span class="text-muted">Belum ada foto</span>
+           <div class="d-flex justify-content-between align-items-center mb-3">
+             <a href="<?php echo base_url(); ?>index.php/root/kegiatan/new" class="btn btn-primary">
+               ➕ Tambah Kegiatan
+             </a>
+             <a href="<?php echo site_url('root/cetak/kegiatan') . (!empty($selected_periode) ? '?periode_tahun=' . urlencode($selected_periode) : '') . (!empty($selected_semester) ? (empty($selected_periode) ? '?' : '&') . 'semester=' . urlencode($selected_semester) : ''); ?>" target="_blank" class="btn btn-outline-secondary">
+               🖨️ Cetak Laporan Kegiatan
+             </a>
+           </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Thumbnail</th>
+                  <th scope="col">Nama Kegiatan</th>
+                  <th scope="col">Periode &amp; Semester</th>
+                  <th scope="col">Tanggal &amp; Lokasi</th>
+                  <th scope="col">Deskripsi</th>
+                  <th scope="col" class="text-end">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (!empty($kegiatan)): ?>
+                  <?php foreach ($kegiatan as $k) { ?>
+                  <tr>
+                    <td>
+                      <?php if (!empty($k->foto)) { ?>
+                        <img src="<?php echo base_url('uploads/kegiatan/' . rawurlencode($k->foto)); ?>" alt="Thumbnail <?php echo html_escape($k->nama_kegiatan); ?>" class="rounded" style="width: 100px; height: 60px; object-fit: cover;">
+                      <?php } else { ?>
+                        <span class="badge bg-light text-muted border">No photo</span>
+                      <?php } ?>
+                    </td>
+                    <td><strong class="text-dark"><?php echo html_escape($k->nama_kegiatan); ?></strong></td>
+                    <td>
+                      <span class="badge bg-success mb-1"><?php echo html_escape($k->periode_tahun ? $k->periode_tahun : '-'); ?></span><br>
+                      <span class="badge bg-info text-dark"><?php echo html_escape($k->semester ? $k->semester : '-'); ?></span>
+                    </td>
+                    <td>
+                      <div><?php echo date('d-m-Y', strtotime($k->tanggal)); ?></div>
+                      <small class="text-muted"><?php echo html_escape($k->lokasi ? $k->lokasi : '-'); ?></small>
+                    </td>
+                    <td>
+                      <?php echo !empty($k->deskripsi) ? html_escape(substr(strip_tags($k->deskripsi), 0, 70)) . '...' : '-'; ?>
+                    </td>
+                    <td class="text-end">
+                      <a href="<?php echo site_url('root/cetak/kegiatan-detail/' . $k->id_kegiatan); ?>" target="_blank" class="btn btn-info btn-sm text-white mb-1" title="Cetak LPJ Kegiatan">🖨️ LPJ</a>
+                      <a href="<?php echo base_url(); ?>index.php/root/kegiatan/edit/<?php echo $k->id_kegiatan; ?>" class="btn btn-success btn-sm mb-1">Ubah</a>
+                      <a href="<?php echo base_url(); ?>index.php/root/kegiatan/delete/<?php echo $k->id_kegiatan; ?>" class="btn btn-danger btn-sm mb-1" onclick="return confirm('Yakin ingin hapus kegiatan ini?');">Hapus</a>
+                    </td>
+                  </tr>
                   <?php } ?>
-                </td>
-                <td><?php echo html_escape($k->nama_kegiatan); ?></td>
-                <td><?php echo html_escape($k->tanggal); ?></td>
-                <td><?php echo html_escape($k->lokasi); ?></td>
-                <td>
-                  <?php echo !empty($k->deskripsi) ? html_escape(substr(strip_tags($k->deskripsi), 0, 80)) : '-'; ?>
-                </td>
-                <td>
-                  <a href="<?php echo base_url(); ?>index.php/root/kegiatan/edit/<?php echo $k->id_kegiatan; ?>" class="btn btn-success">Ubah</a>
-                  <a href="<?php echo base_url(); ?>index.php/root/kegiatan/delete/<?php echo $k->id_kegiatan; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
-                </td>
-              </tr>
-              <?php } ?>
-            </tbody>
-          </table>
+                <?php else: ?>
+                  <tr>
+                    <td colspan="6" class="text-center py-4 text-muted">Tidak ada data kegiatan.</td>
+                  </tr>
+                <?php endif; ?>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>

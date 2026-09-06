@@ -89,23 +89,29 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#"><img src="<?php echo base_url('assets/images/logo-bem.png'); ?>" alt="Logo BEM" style="height:32px; width:32px; object-fit:contain; border-radius:50%; background:#fff; padding:1px;"> Sistem Informasi Pengelolaan Kegiatan BEM INAR</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kegiatan">Kegiatan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">kepanitian</a>
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/kepanitiaan">Kepanitiaan</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a>
+              <a class="nav-link active" href="<?php echo base_url(); ?>index.php/root/keuangan">Keuangan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/rekap">📊 Rekap Data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning fw-bold" href="<?php echo base_url(); ?>index.php/root/cetak">🖨️ Cetak Laporan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url(); ?>index.php/root/admin">Admin</a>
             </li>
           </ul>
           <span class="navbar-text me-3"><?php echo html_escape($this->session->userdata('admin_username')); ?></span>
@@ -117,9 +123,14 @@
       <div class="card">
         <h5 class="card-header text-center">Data Keuangan</h5>
         <div class="card-body">
-           <a href="<?php echo base_url(); ?>index.php/root/keuangan/new">
-           <button type="button" class="btn btn-primary">Tambah</button>
-          </a>
+           <div class="d-flex justify-content-between align-items-center mb-3">
+             <a href="<?php echo base_url(); ?>index.php/root/keuangan/new">
+               <button type="button" class="btn btn-primary">Tambah</button>
+             </a>
+             <a href="<?php echo site_url('root/cetak/keuangan'); ?>" target="_blank" class="btn btn-outline-secondary">
+               🖨️ Cetak Laporan Keuangan
+             </a>
+           </div>
           <table class="table">
             <thead>
               <tr>
@@ -134,14 +145,14 @@
             <tbody>
                <?php foreach ($keuangan as $k) { ?>
               <tr>
-                <td><?php echo !empty($k->id_kegiatan) ? $k->id_kegiatan : '-'; ?></td>
-                <td><?php echo $k->keterangan; ?></td>
+                <td><?php echo !empty($k->nama_kegiatan) ? html_escape($k->nama_kegiatan) : (!empty($k->id_kegiatan) ? 'ID #'.$k->id_kegiatan : '-'); ?></td>
+                <td><?php echo html_escape($k->keterangan); ?></td>
                 <td><?php echo $k->jumlah; ?></td>
-                <td><?php echo $k->harga; ?></td>
-                <td><?php echo $k->tanggal; ?></td>
+                <td>Rp <?php echo number_format($k->harga, 0, ',', '.'); ?></td>
+                <td><?php echo date('d-m-Y', strtotime($k->tanggal)); ?></td>
                 <td>
-                  <a href="<?php echo base_url(); ?>index.php/root/keuangan/edit/<?php echo $k->id_keuangan; ?>" class="btn btn-success">Ubah</a>
-                  <a href="<?php echo base_url(); ?>index.php/root/keuangan/delete/<?php echo $k->id_keuangan; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
+                  <a href="<?php echo base_url(); ?>index.php/root/keuangan/edit/<?php echo $k->id_keuangan; ?>" class="btn btn-success btn-sm">Ubah</a>
+                  <a href="<?php echo base_url(); ?>index.php/root/keuangan/delete/<?php echo $k->id_keuangan; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin hapus?');">Hapus</a>
                 </td>
               </tr>
                  <?php } ?>
